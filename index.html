@@ -6,16 +6,16 @@
     <title>Enter Code</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Courier New', sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #00fff2;
+            background-color: black;
         }
         .container {
             text-align: center;
-            background: #00fff2;
+            background: black;
             padding: 30px;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
@@ -65,7 +65,23 @@
         
         if (userInput === secretCode) {
             errorMessage.style.display = 'none';
-            window.location.href = "secret.html";
+            window.location.href = "vesper.html";
+        } else {
+            errorMessage.style.display = 'block';
+        }
+    }
+</script>
+
+<script>
+    function checkCode() {
+        const userInput = document.getElementById('code-input').value;
+        const errorMessage = document.getElementById('error-message');
+        
+        const secretCode = "director"; 
+        
+        if (userInput === secretCode) {
+            errorMessage.style.display = 'none';
+            window.location.href = "orion.html";
         } else {
             errorMessage.style.display = 'block';
         }
