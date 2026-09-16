@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAJESTIC-12 // INTERNAL NETWORK</title>
+    <style>
+        :root {
+            --glow-color: #00ff66;
+            --bg-color: #050b05;
+            --panel-bg: rgba(0, 20, 5, 0.6);
+            --text-color: #7fff7f;
+            --alert-color: #ff3333;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            cursor: crosshair;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--glow-color);
+            font-family: 'Courier New', Courier, monospace;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* CRT Scanline and Flicker Effects */
+        body::before {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 2;
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none;
+        }
+
+        .screen {
+            padding: 40px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background: radial-gradient(circle, rgba(0,30,10,0.3) 0%, rgba(0,0,0,0.8) 100%);
+        }
+
+        /* Header Network Status */
+        header {
+            border-bottom: 2px solid var(--glow-color);
+            padding-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            text-shadow: 0 0 5px var(--glow-color);
+        }
+
+        .sys-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .security-level {
+            color: var(--alert-color);
+            border: 1px solid var(--alert-color);
+            padding: 3px 8px;
+            font-size: 0.8rem;
+            text-shadow: 0 0 5px var(--alert-color);
+            box-shadow: 0 0 5px rgba(255,51,51,0.4);
+            animation: blink 2s infinite;
+        }
+
+        /* Main Console Layout */
+        .console-body {
+            flex-grow: 1;
+            margin: 30px 0;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 30px;
+        }
+
+        .welcome-panel {
+            background: var(--panel-bg);
+            border: 1px solid var(--glow-color);
+            padding: 25px;
+            box-shadow: inset 0 0 15px rgba(0,255,102,0.1);
+        }
+
+        .welcome-panel h2 {
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .terminal-text {
+            color: var(--text-color);
+            line-height: 1.6;
+            font-size: 0.9rem;
+        }
+
+        /* Project Grid Buttons */
+        .projects-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .panel-label {
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            opacity: 0.8;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            height: 100%;
+        }
+
+        .project-btn {
+            background: rgba(0, 40, 10, 0.3);
+            border: 1px solid var(--glow-color);
+            color: var(--glow-color);
+            font-family: inherit;
+            font-size: 1.1rem;
+            text-align: left;
+            padding: 20px;
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-btn:hover {
+            background: var(--glow-color);
+            color: var(--bg-color);
+            box-shadow: 0 0 15px var(--glow-color);
+            font-weight: bold;
+        }
+
+        .project-btn .code {
+            display: block;
+            font-size: 0.7rem;
+            opacity: 0.6;
+            margin-bottom: 5px;
+        }
+
+        .project-btn:hover .code {
+            opacity: 1;
+        }
+
+        .project-btn::after {
+            content: '[ACCESS]';
+            position: absolute;
+            right: 20px;
+            bottom: 20px;
+            font-size: 0.8rem;
+            opacity: 0;
+        }
+
+        .project-btn:hover::after {
+            opacity: 1;
+        }
+
+        /* Footer Status Bar */
+        footer {
+            border-top: 1px solid rgba(0,255,102,0.4);
+            padding-top: 10px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+
+        @keyframes blink {
+            0%, 49% { opacity: 1; }
+            50%, 100% { opacity: 0.4; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="screen">
+        <header>
+            <div>
+                <div class="sys-title">DEPT OF ARCHIVAL ANOMALIES</div>
+                <div style="font-size: 0.8rem; opacity: 0.7;">NODE: 77-OMEGA // PROXY: ACTIVE</div>
+            </div>
+            <div class="security-level">CLEARANCE LEVEL 5 REQUIRED</div>
+        </header>
+
+        <div class="console-body">
+            <!-- Left Panel: User Welcome -->
+            <div class="welcome-panel">
+                <h2>OPERATOR CONSOLE</h2>
+                <div class="terminal-text">
+                    <p id="greeting">> INITIALIZING SECURE SESSION...</p>
+                    <p>> USER verified: <span style="text-decoration: underline;">OVR-LORD-99</span></p>
+                    <p>> LOG TIME: <span id="timestamp"></span></p>
+                    <br>
+                    <p style="color: var(--alert-color)">WARNING: All activities on this terminal are monitored under federal counter-intelligence protocols. Unauthorized duplication will prompt immediate hardware termination.</p>
+                </div>
+            </div>
+
+            <!-- Right Panel: Project Access Buttons -->
+            <div class="projects-panel">
+                <div class="panel-label">ACTIVE BLACK PROJECTS // SELECT TO DECRYPT</div>
+                <div class="project-grid">
+                    
+                    <button class="project-btn" onclick="alert('Decrypting Project CHRONOS files...')">
+                        <span class="code">PROJ_01 // SECURE</span>
+                        CHRONOS TIME-WARP
+                    </button>
+
+                    <button class="project-btn" onclick="alert('Accessing Sub-surface Hive Schematics...')">
+                        <span class="code">PROJ_04 // CLASSIFIED</span>
+                        D.U.M.B. BLUEPRINTS
+                    </button>
+
+                    <button class="project-btn" onclick="alert('Warning: Neural uplink initiation failed.')">
+                        <span class="code">PROJ_09 // RESTRICTED</span>
+                        PROJECT MK-ULTRA II
+                    </button>
+
+                    <button class="project-btn" onclick="alert('Opening Extraterrestrial Biologics log...')">
+                        <span class="code">PROJ_12 // TOP SECRET</span>
+                        EBE RETRIEVALS
+                    </button>
+
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <div id="location-stamp">SYS_LOC: GUNUNG SINDUR // INDONESIA</div>
+            <div>ENCRYPTION: AES-XTS-512 // TRANSIT SECURE</div>
+        </footer>
+    </div>
+
+    <script>
+        // Set dynamic live timestamp
+        function updateTime() {
+            const now = new Date();
+            document.getElementById('timestamp').innerText = now.toISOString().replace('T', ' ').substring(0, 19) + ' UTC';
+        }
+        setInterval(updateTime, 1000);
+        updateTime();
+
+        // Personalized alert logic can be hooked into the buttons
+    </script>
+</body>
+</html>
