@@ -32,7 +32,7 @@
             font-size: 16px;
             background-color: #00000;
             color: white;
-            border: none;
+            border: 1px solid #00fff2;
             border-radius: 4px;
             cursor: pointer;
         }
@@ -65,7 +65,6 @@
         
         if (userInput === secretCode) {
             errorMessage.style.display = 'none';
-
             window.location.href = "secret.html";
         } else {
             errorMessage.style.display = 'block';
