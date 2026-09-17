@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AHAI // PERSONNEL DOSSIER</title>
+    <title>AHAI // PERSONNEL DOSSIER: RAINARD ROZEAL AUDEBERT</title>
     <style>
         :root {
             --glow-color: #00fff2;
@@ -106,13 +106,64 @@
         .doc-body {
             line-height: 1.8;
             font-size: 0.95rem;
-            white-space: pre-wrap; /* Keeps line breaks intact */
+            white-space: pre-wrap;
+        }
+
+        /* Collapsible Section Layouts */
+        details {
+            border: 1px dashed rgba(0, 255, 242, 0.3);
+            margin-bottom: 15px;
+            padding: 5px;
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        details[open] {
+            border: 1px solid var(--glow-color);
+            box-shadow: 0 0 8px rgba(0, 255, 242, 0.2);
+        }
+
+        summary {
+            padding: 10px;
+            font-weight: bold;
+            color: var(--glow-color);
+            cursor: pointer;
+            outline: none;
+            user-select: none;
+            list-style: none; /* Hide default arrow */
+        }
+
+        summary::before {
+            content: "[+] ";
+            color: var(--glow-color);
+        }
+
+        details[open] summary::before {
+            content: "[-] ";
+            color: var(--alert-color);
+        }
+
+        summary:hover {
+            background: rgba(0, 255, 242, 0.1);
+            text-shadow: 0 0 5px var(--glow-color);
+        }
+
+        .details-content {
+            padding: 15px 10px 10px 10px;
+            border-top: 1px dashed rgba(0, 255, 242, 0.2);
+            color: var(--glow-color);
         }
 
         .redacted {
             background: var(--glow-color);
             color: var(--bg-color);
             padding: 0 4px;
+        }
+        
+        .redacted-alert {
+            background: var(--alert-color);
+            color: var(--bg-color);
+            padding: 0 4px;
+            font-weight: bold;
         }
 
         footer {
@@ -130,36 +181,209 @@
     <div class="screen">
         <header>
             <div>
-                <div class="sys-title">DEPT OF ARCHIVAL ANOMALIES // DECRYPT INTERFACES</div>
-                <div style="font-size: 0.8rem; opacity: 0.7;">DECRYPT_NODE: OMEGA-77</div>
+                <div class="sys-title">ASTRAL & HAZARDOUS ANOMALY INSTITUTE // ARCHIVE</div>
+                <div style="font-size: 0.8rem; opacity: 0.7;">DOC_ID: AHAI-HR-000398 // CLASSIFICATION: LEVEL 3</div>
             </div>
-            <!-- Points back to your main system console index layout -->
-            <a href="index.html" class="back-btn">&lt;&lt; RETURN TO OVERVIEW</a>
+            <a href="orion.html" class="back-btn">&lt;&lt; RETURN TO OVERVIEW</a>
         </header>
 
-        <!-- Main Personnel Profile Area -->
         <div class="document-container">
-            <div class="doc-header">PERSONNEL DOSSIER // RESTRICTED ACCESS CLEARANCE FIVE</div>
-            <div class="doc-body">> USER ID: 0R10N
-> SYSTEM LINK ACCESS LEVEL: LEVEL 5 (DIRECTOR CRITERIA)
+            <div class="doc-header">AHAI PERSONNEL DOSSIER // EXECUTIVE ARCHIVE PROTOCOL</div>
+            
+            <div class="doc-body" style="margin-bottom: 25px;">> TARGET ENTITY: Rainard Rozeal Audebert
+> SYSTEM STATUS: ACTIVE PERSONNEL
+> TIMESTAMP STAMP: A292-C4037-Z09-P17</div>
 
-[BIODATA DETAILED]:
-Full Name: Orion Vance
-Assigned Role: Lead Director
-Department: Archival Anomalies
-Current Node Status: STABLE
+            <!-- Collapsible: Basic Info -->
+            <details open>
+                <summary>BASIC INFORMATION</summary>
+                <div class="details-content">
+Full Name: Rainard Rozeal Audebert
+Preferred Name: Rainard
+Personnel ID: AHAI-AG-728
+Position: Messenger, Subject
+Department: External Communications, Internal Communications
+Division: Messenger Agency
+Clearance Level: Level 3
+Employment Status: Active
+                </div>
+            </details>
 
-[SECURITY HANDSHAKE MEMO]:
-Operator active under core mainframe shell root@AHAI_NODE_77. Under counter-intel protocol directives, certain metadata fields have been scrubbed to prevent external exfiltration trace syncs.
+            <!-- Collapsible: Personal Info -->
+            <details>
+                <summary>PERSONAL INFORMATION</summary>
+                <div class="details-content">
+Pronouns: He/him
+Species: Cesnalesian/Avian
+Origin: Cesnalesia
+Date of Birth (NSC): A275-C1802-Z07-P28
+Age: 31
 
-Warning: Short-term memory logs linked directly back to quantum telemetry disruptions outlined in <span class="redacted">[PROJ_01 DATA PANELS]</span>. 
+Languages:
+- Nexus Common
+- Standard Galactic
+- Sol-3 English Institute
+- Cesnalesian
+                </div>
+            </details>
 
-> ACCESS STATUS: GRANTED // TARGET VERIFIED.</div>
+            <!-- Collapsible: Professional Profile -->
+            <details>
+                <summary>PROFESSIONAL PROFILE</summary>
+                <div class="details-content">
+Primary Specialization:
+- Message Delivery
+
+Primary Duties:
+- Oversees Communications Flow
+- Send out and recieve reports
+
+Secondary Duties:
+- Public communications
+- AHAI Ambassador
+
+Current Assignment: Messenger Agent
+                </div>
+            </details>
+
+            <!-- Collapsible: Qualifications -->
+            <details>
+                <summary>QUALIFICATIONS & TRAITS</summary>
+                <div class="details-content">
+Education:
+- Doctorate-equivalent in Astronomical Phenomena
+- Advanced Certification in Interversal Ethics
+- Master Archivist Accreditation
+
+Certifications:
+- Executive Leadership License
+- Omega Archive Authorization
+- Hazard Response Qualification IV
+
+Notable Skills:
+- Exceptional memory retention
+- Ancient language translation
+- High-pressure diplomacy
+- Crisis de-escalation
+- Public speaking
+
+Known Weaknesses:
+- Frequently accepts excessive workloads.
+- Displays emotional investment in preservation cases.
+- Known to ignore scheduled breaks.
+                </div>
+            </details>
+
+            <!-- Collapsible: Psychological Evaluation -->
+            <details>
+                <summary>PSYCHOLOGICAL EVALUATION</summary>
+                <div class="details-content">
+Temperament: Professional, articulate, composed.
+Stress Tolerance: Exceptional.
+Leadership Assessment: Highly trusted among Institute personnel. Frequently resolves conflicts between departments before escalation.
+Interpersonal Notes: Approachable despite executive position. Maintains positive relationships with staff across all clearance levels.
+
+Psychological Remarks: Subject demonstrates profound empathy without compromising operational judgment. Continued wellness evaluations recommended due to chronic overwork tendencies.
+                </div>
+            </details>
+
+            <!-- Collapsible: Medical Record -->
+            <details>
+                <summary>MEDICAL RECORD</summary>
+                <div class="details-content">
+Medical Status: Excellent
+Known Allergies: None documented.
+Medical Restrictions: Mandatory recovery leave after prolonged expedition assignments.
+                </div>
+            </details>
+
+            <!-- Collapsible: Anomalous Info -->
+            <details>
+                <summary>ANOMALOUS INFORMATION</summary>
+                <div class="details-content">
+Classification: <span class="redacted-alert">[Ω CLEARANCE REQUIRED]</span>
+Designation: <span class="redacted">REDACTED</span>
+Observed Abilities: <span class="redacted">REDACTED</span>
+Containment Status: Not Applicable.
+                </div>
+            </details>
+
+            <!-- Collapsible: Equipment -->
+            <details>
+                <summary>EQUIPMENT LOG</summary>
+                <div class="details-content">
+Issued Equipment:
+- Executive Identification Badge
+- Quantum Archive Access Key
+- Secure Communications Device Level 5
+- Data Tablet
+
+Personal Research Tools:
+- Portable Stellar Scanner
+- Archive Restoration Kit
+- Personal Observation Journal
+                </div>
+            </details>
+
+            <!-- Collapsible: Performance Record -->
+            <details>
+                <summary>PERFORMANCE RECORD</summary>
+                <div class="details-content">
+Awards:
+- Founder Medal
+- Archive Cross
+- Distinguished Service Citation
+- Ethics Council Recognition
+
+Disciplinary Actions: None.
+
+Major Contributions:
+- Modernization of Executive Archive Systems
+- Revision of Institute Containment Ethics Guidelines
+- Preservation of over 1.8 million historical anomaly records
+- Development of the Public Information Initiative
+
+Years of Service: <span class="redacted">CLASSIFIED</span>
+                </div>
+            </details>
+
+            <!-- Collapsible: Administrative Notes -->
+            <details>
+                <summary>ADMINISTRATIVE NOTES</summary>
+                <div class="details-content">
+Supervisor: Director Orion Vale
+
+Subordinates:
+- Executive Secretariat
+- Archive Administration
+- Public Affairs Office
+
+Office Location: Executive Wing - Central Headquarters
+
+Security Permissions:
+- Executive Administrative Authority
+- Archive Master Access
+- Emergency Command Authorization
+                </div>
+            </details>
+
+            <!-- Collapsible: Final Remarks & Director's Notes -->
+            <details open>
+                <summary>FINAL REMARKS & DIRECTIVES</summary>
+                <div class="details-content">
+Mx. Celeste Vesper continues to exemplify the Institute's foundational principle that understanding must precede action. Their commitment to ethical oversight and historical preservation has significantly influenced modern AHAI policy. Personnel consistently describe the Assistant Director as approachable, compassionate, and unwaveringly dedicated to both the Institute and its people.
+
+[DIRECTOR'S OBSERVATION]
+Author: Dr. Orion Vale
+
+"Assistant Director Vesper possesses an exceptional ability to recognize the historical significance of even the most routine observations. While their dedication to the Institute is beyond question, they continue to require periodic reminders that the preservation of personnel is no less important than the preservation of knowledge. I recommend compulsory leave be enforced when necessary."
+                </div>
+            </details>
         </div>
 
         <footer>
             <div>DECRYPT ENGINE: SECURE_CORE_v4.1</div>
-            <div>STATUS: PROFILED AND MONITORING</div>
+            <div>LAST REVIEWED: A284-C6136-Z12-P30</div>
         </footer>
     </div>
 
