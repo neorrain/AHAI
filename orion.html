@@ -410,7 +410,23 @@
                     <p style="color: var(--alert-color)">WARNING: All activities on this terminal are monitored under federal counter-intelligence protocols. Unauthorized duplication will prompt immediate hardware termination.</p>
                 </div>
             </div>
-            
+                    <!-- Hidden Command Terminal Overlay -->
+                    <div id="hidden-terminal" class="hidden-console">
+                        <div class="hidden-header">
+                            <span>SECURE REVERSE-SHELL ENGINE // ROOT@AHAI_NODE_77</span>
+                            <button onclick="closeHiddenTerminal()" class="close-term-btn">[X]</button>
+                        </div>
+                        <div class="hidden-output" id="term-output">
+                            <p>Establishing shadow handshake...</p>
+                            <p>Exploit successful. System root acquired.</p>
+                            <p>Type 'help' for hidden archives.</p>
+                        </div>
+                        <div class="hidden-input-line">
+                            <span>root#</span>
+                            <input type="text" id="term-input" onkeydown="runHiddenCommand(event)" autocomplete="off">
+                        </div>
+                    </div>
+                </div>
             <!-- Folder Style Layout: Tabs sit on top of the container -->
             <div class="projects-panel">
                 <!-- Folder Tabs Lineup -->
@@ -438,22 +454,6 @@
                         <button class="project-btn" onclick="alert('Opening Biologics log...')">
                             <span class="code">PROJ_12 // TOP SECRET</span>EBE RETRIEVALS
                         </button>
-                    </div>
-                                        <!-- Hidden Command Terminal Overlay -->
-                    <div id="hidden-terminal" class="hidden-console">
-                        <div class="hidden-header">
-                            <span>SECURE REVERSE-SHELL ENGINE // ROOT@AHAI_NODE_77</span>
-                            <button onclick="closeHiddenTerminal()" class="close-term-btn">[X]</button>
-                        </div>
-                        <div class="hidden-output" id="term-output">
-                            <p>Establishing shadow handshake...</p>
-                            <p>Exploit successful. System root acquired.</p>
-                            <p>Type 'help' for hidden archives.</p>
-                        </div>
-                        <div class="hidden-input-line">
-                            <span>root#</span>
-                            <input type="text" id="term-input" onkeydown="runHiddenCommand(event)" autocomplete="off">
-                        </div>
                     </div>
                 </div>
             </div>
