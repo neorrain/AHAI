@@ -266,35 +266,37 @@
                     <p style="color: var(--alert-color)">WARNING: All activities on this terminal are monitored under federal counter-intelligence protocols. Unauthorized duplication will prompt immediate hardware termination.</p>
                 </div>
             </div>
-
-            <!-- Right Panel: Project Access Buttons -->
+            
+            <!-- Folder Style Layout: Tabs sit on top of the container -->
             <div class="projects-panel">
-                <div class="panel-label">ACTIVE PROJECTS // SELECT TO DECRYPT</div>
-                <div class="project-grid">
-                    
-                    <button class="project-btn" onclick="alert('Decrypting Project CHRONOS files...')">
-                        <span class="code">PROJ_01 // SECURE</span>
-                        CHRONOS TIME-WARP
-                    </button>
-
-                    <button class="project-btn" onclick="alert('Accessing Sub-surface Hive Schematics...')">
-                        <span class="code">PROJ_04 // CLASSIFIED</span>
-                        D.U.M.B. BLUEPRINTS
-                    </button>
-
-                    <button class="project-btn" onclick="alert('Warning: Neural uplink initiation failed.')">
-                        <span class="code">PROJ_09 // RESTRICTED</span>
-                        PROJECT MK-ULTRA II
-                    </button>
-
-                    <button class="project-btn" onclick="alert('Opening Extraterrestrial Biologics log...')">
-                        <span class="code">PROJ_12 // TOP SECRET</span>
-                        EBE RETRIEVALS
-                    </button>
-
+                <!-- Folder Tabs Lineup -->
+                <div class="folder-tabs-row">
+                    <button class="folder-tab active" onclick="switchTab('projects', this)">PROJECTS</button>
+                    <button class="folder-tab" onclick="switchTab('archives', this)">ARCHIVES</button>
+                    <button class="folder-tab" onclick="switchTab('journals', this)">JOURNALS</button>
+                    <button class="folder-tab" onclick="switchTab('users', this)">USERS</button>
+                </div>
+            
+                <!-- Main Folder Container Body -->
+                <div class="folder-content-container">
+                    <div class="panel-label" id="panel-title-label">ACTIVE PROJECTS // DECRYPTED VIA TERMINAL</div>
+                    <div class="project-grid" id="dynamic-grid">
+                        <!-- Default Content: Projects Grid -->
+                        <button class="project-btn" onclick="alert('Accessing Chronos database...')">
+                            <span class="code">PROJ_01 // SECURE</span>CHRONOS TIME-WARP
+                        </button>
+                        <button class="project-btn" onclick="alert('Accessing Hive Schematics...')">
+                            <span class="code">PROJ_04 // CLASSIFIED</span>D.U.M.B. BLUEPRINTS
+                        </button>
+                        <button class="project-btn" onclick="alert('Neural uplink failed.')">
+                            <span class="code">PROJ_09 // RESTRICTED</span>PROJECT MK-ULTRA II
+                        </button>
+                        <button class="project-btn" onclick="alert('Opening Biologics log...')">
+                            <span class="code">PROJ_12 // TOP SECRET</span>EBE RETRIEVALS
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
 
         <footer>
             <div id="location-stamp">SYS_LOC: AHAI HQ // NEXUS POINT</div>
