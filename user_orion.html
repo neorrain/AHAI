@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AHAI // PERSONNEL DOSSIER: RAINARD ROZEAL AUDEBERT</title>
+    <style>
+        :root {
+            --glow-color: #00fff2;
+            --bg-color: #000000;
+            --panel-bg: rgba(0, 20, 5, 0.6);
+            --text-color: #00fff2;
+            --alert-color: #ff0077;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            cursor: crosshair;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--glow-color);
+            font-family: 'Courier New', Courier, monospace;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* CRT Scanline and Flicker Effects */
+        body::before {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 2;
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none;
+        }
+
+        .screen {
+            padding: 40px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background: radial-gradient(circle, rgba(0,30,10,0.3) 0%, rgba(0,0,0,0.8) 100%);
+        }
+
+        header {
+            border-bottom: 2px solid var(--glow-color);
+            padding-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            text-shadow: 0 0 5px var(--glow-color);
+        }
+
+        .sys-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .back-btn {
+            background: transparent;
+            border: 1px solid var(--glow-color);
+            color: var(--glow-color);
+            font-family: inherit;
+            padding: 5px 15px;
+            text-decoration: none;
+            font-size: 0.8rem;
+            transition: all 0.2s ease;
+        }
+
+        .back-btn:hover {
+            background: var(--glow-color);
+            color: var(--bg-color);
+            box-shadow: 0 0 10px var(--glow-color);
+            font-weight: bold;
+        }
+
+        .document-container {
+            flex-grow: 1;
+            margin: 30px 0;
+            background: var(--panel-bg);
+            border: 1px solid var(--glow-color);
+            padding: 30px;
+            box-shadow: inset 0 0 15px rgba(0,255,102,0.1);
+            overflow-y: auto;
+        }
+
+        .doc-header {
+            color: var(--alert-color);
+            border-bottom: 1px dashed var(--alert-color);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            text-shadow: 0 0 5px var(--alert-color);
+        }
+
+        .doc-body {
+            line-height: 1.8;
+            font-size: 0.95rem;
+            white-space: pre-wrap;
+        }
+
+        /* Collapsible Section Layouts */
+        details {
+            border: 1px dashed rgba(0, 255, 242, 0.3);
+            margin-bottom: 15px;
+            padding: 5px;
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        details[open] {
+            border: 1px solid var(--glow-color);
+            box-shadow: 0 0 8px rgba(0, 255, 242, 0.2);
+        }
+
+        summary {
+            padding: 10px;
+            font-weight: bold;
+            color: var(--glow-color);
+            cursor: pointer;
+            outline: none;
+            user-select: none;
+            list-style: none;
+        }
+
+        summary::before {
+            content: "[+] ";
+            color: var(--glow-color);
+        }
+
+        details[open] summary::before {
+            content: "[-] ";
+            color: var(--alert-color);
+        }
+
+        summary:hover {
+            background: rgba(0, 255, 242, 0.1);
+            text-shadow: 0 0 5px var(--glow-color);
+        }
+
+        .details-content {
+            padding: 15px 10px 10px 10px;
+            border-top: 1px dashed rgba(0, 255, 242, 0.2);
+            color: var(--glow-color);
+            white-space: pre-wrap;
+        }
+
+        .redacted {
+            background: var(--glow-color);
+            color: var(--bg-color);
+            padding: 0 4px;
+        }
+        
+        .redacted-alert {
+            background: var(--alert-color);
+            color: var(--bg-color);
+            padding: 0 4px;
+            font-weight: bold;
+        }
+
+        footer {
+            border-top: 1px solid rgba(0,255,102,0.4);
+            padding-top: 10px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="screen">
+        <header>
+            <div>
+                <div class="sys-title">ASTRAL & HAZARDOUS ANOMALY INSTITUTE // ARCHIVE</div>
+                <div style="font-size: 0.8rem; opacity: 0.7;">DOC_ID: AHAI-HR-000398 // CLASSIFICATION: LEVEL 3</div>
+            </div>
+            <a href="orion.html" class="back-btn">&lt;&lt; RETURN TO OVERVIEW</a>
+        </header>
+
+        <div class="document-container">
+            <div class="doc-header">AHAI PERSONNEL DOSSIER // EXECUTIVE ARCHIVE PROTOCOL</div>
+            
+            <div class="doc-body" style="margin-bottom: 25px;">> TARGET ENTITY: Rainard Rozeal Audebert
+> SYSTEM STATUS: ACTIVE PERSONNEL
+> TIMESTAMP STAMP: A292-C4037-Z09-P17</div>
+
+            <!-- Collapsible: Basic Info -->
+            <details open>
+                <summary>BASIC INFORMATION</summary>
+                <div class="details-content">
+Full Name: Rainard Rozeal Audebert
+Preferred Name: Rainard
+Personnel ID: AHAI-AG-728
+Position: Messenger, Subject
+Department: External Communications, Internal Communications
+Division: Messenger Agency
+Clearance Level: Level 3
+Employment Status: Active
+                </div>
+            </details>
+
+            <!-- Collapsible: Personal Info -->
+            <details>
+                <summary>PERSONAL INFORMATION</summary>
+                <div class="details-content">
+Pronouns: He/him
+Species: Cesnalesian/Avian
+Origin: Cesnalesia
+Date of Birth (NSC): A275-C1802-Z07-P28
+Age: 31
+
+Languages:
+- Nexus Common
+- Sol-3 English Institute
+- Cesnalesian
+                </div>
+            </details>
+
+            <!-- Collapsible: Professional Profile -->
+            <details>
+                <summary>PROFESSIONAL PROFILE</summary>
+                <div class="details-content">
+Primary Specialization:
+- Message Delivery
+
+Primary Duties:
+- Oversees Communications Flow
+- Send out and recieve reports
+
+Secondary Duties:
+- Public communications
+- AHAI Ambassador
+
+Current Assignment: Messenger Agent
+                </div>
+            </details>
+
+            <!-- Collapsible: Qualifications -->
+            <details>
+                <summary>QUALIFICATIONS & TRAITS</summary>
+                <div class="details-content">
+Education:
+- <span class="redacted">CLASSIFIED</span>
+                    
+Certifications:
+- Thisonis Church Prophet's Right-Hand Man
+- <span class="redacted">CLASSIFIED</span>
+- <span class="redacted">CLASSIFIED</span>
+
+Notable Skills:
+- Public Speaking
+- Agility
+- Lifespan Manipulation
+- <span class="redacted">CLASSIFIED</span>
+
+Known Weaknesses:
+- Frequently accepts excessive workloads.
+                </div>
+            </details>
+
+            <!-- Collapsible: Psychological Evaluation -->
+            <details>
+                <summary>PSYCHOLOGICAL EVALUATION</summary>
+                <div class="details-content">
+Temperament: Calm, friendly.
+Stress Tolerance: Well
+Leadership Assessment: Highly trusted among Institute personnel. Frequently resolves conflicts between departments before escalation.
+Interpersonal Notes: Approachable. Maintains positive relationships with staff across all clearance levels.
+
+Psychological Remarks: Subject demonstrates profound empathy without compromising operational judgment.
+                </div>
+            </details>
+
+            <!-- Collapsible: Medical Record -->
+            <details>
+                <summary>MEDICAL RECORD</summary>
+                <div class="details-content">
+Medical Status: Well
+Known Allergies: Nuts
+Medical Restrictions: Mandatory recovery leave after prolonged message delivery.
+                </div>
+            </details>
+
+            <!-- Collapsible: Anomalous Info -->
+            <details>
+                <summary>ANOMALOUS INFORMATION</summary>
+                <div class="details-content">
+Classification: HUM/SAP - STA-III
+Hazard: IV - STABLE/ADAPTIVE
+Observed Abilities: COG-SPA-TEM-VOI
+Containment Status: Not Applicable.
+                </div>
+            </details>
+
+            <!-- Collapsible: Equipment -->
+            <details>
+                <summary>EQUIPMENT LOG</summary>
+                <div class="details-content">
+Issued Equipment:
+- AHAI Messenger Identification Badge
+- Secure Communication Terminal
+- Encrypted Report Capsule Set
+- Long-Distance Signal Beacon
+- AHAI Emergency Medical Kit
+- Messenger Agency Field Uniform
+- Dimensional Transit Pass
+- Personal Protective Harness
+
+Personal Research Tools:
+- Cesnalesian navigation compass
+- Handwritten message ledger
+- Personal communication device
+- Anomalous route mapping journal
+- Feather identification seals
+- Portable chronometric recorder
+                </div>
+            </details>
+
+            <!-- Collapsible: Performance Record -->
+            <details>
+                <summary>PERFORMANCE RECORD</summary>
+                <div class="details-content">
+Awards:
+- AHAI Distinguished Messenger Award
+- Interdepartmental Service Commendation
+- External Relations Excellence Citation
+- Cesnalesian Diplomatic Service Recognition
+
+
+Disciplinary Actions: None.
+
+Major Contributions:
+- Established standardized communication routes between AHAI departments.
+- Maintained communications during multiple facility-wide emergencies.
+- Assisted in establishing diplomatic communication protocols with Cesnalesian authorities.
+- Successfully delivered classified materials across anomalous and spatially unstable regions.
+- Prevented multiple interdepartmental communication failures through direct mediation.
+- Voluntarily assisted newly recruited anomalous personnel in adapting to Institute procedures.
+
+Years of Service: 8
+                </div>
+            </details>
+
+            <!-- Collapsible: Administrative Notes -->
+            <details>
+                <summary>ADMINISTRATIVE NOTES</summary>
+                <div class="details-content">
+Supervisor: Director Dr. Orion Vale
+
+Subordinates:
+- Messenger Agency — Junior Messenger Division
+- Messenger Agency — Dispatch & Routing Subdivision
+- Messenger Agency — External Correspondence Subdivision
+- Messenger Agency — Internal Correspondence Subdivision
+- Messenger Agency — Diplomatic Courier Subdivision
+
+Office Location: AHAI Central Institute — Communications Wing, Floor 03, Messenger Agency
+
+Security Permissions:
+- Level 3 Internal Archives
+- Messenger Agency Restricted Archives
+- Interdepartmental Communication Network
+- External Communications Network
+- Authorized Anomalous Transit Routes
+- Emergency Communications Channels
+- Limited Cross-Dimensional Communication Access
+                </div>
+            </details>
+
+            <!-- Collapsible: Final Remarks & Director's Notes -->
+            <details open>
+                <summary>FINAL REMARKS & DIRECTIVES</summary>
+                <div class="details-content">
+Subject presents as exceptionally approachable and cooperative despite the considerable responsibilities associated with his position. His strong sense of responsibility appears to be both his greatest professional asset and his primary source of occupational strain.
+
+Rainard demonstrates an unusual willingness to place institutional needs above his own. While this has contributed positively to his reliability, continued monitoring of his workload is recommended.
+
+Subject is advised to recognize that delegating responsibilities is not equivalent to failing them.
+
+[DIRECTOR'S OBSERVATION]
+Author: Dr. Orion Vale
+
+"Rainard has never needed to be reminded how important a message can be. He needs to be reminded that he is allowed to stop carrying them."
+                    
+"The Messenger Agency would collapse without his dedication. That is precisely why I will not allow the Agency to consume him."
+
+"He has crossed distances most of us cannot comprehend simply because someone, somewhere, was waiting to hear from us. I trust him with our messages. I also trust him enough to tell him when he has carried enough."
+                </div>
+            </details>
+        </div>
+
+        <footer>
+            <div>DECRYPT ENGINE: SECURE_CORE_v4.1</div>
+            <div>LAST REVIEWED: A284-C6136-Z12-P30 (this is the NSC calendar..)</div>
+        </footer>
+    </div>
+
+</body>
+</html>
