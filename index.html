@@ -99,21 +99,12 @@
         const errorMessage = document.getElementById('error-message');
         
         const secretCode1 = "ihatemyjob"; 
+        const secretCode2 = "director"; 
         
         if (userInput === secretCode1) {
             errorMessage.style.display = 'none';
             window.location.href = "vesper.html";
-        } else {
-            errorMessage.style.display = 'block';
-        }
-    }
-    function checkCode() {
-        const userInput = document.getElementById('code-input').value;
-        const errorMessage = document.getElementById('error-message');
-        
-        const secretCode2 = "director"; 
-        
-        if (userInput === secretCode2) {
+        } else if (userInput === secretCode2) {
             errorMessage.style.display = 'none';
             window.location.href = "orion.html";
         } else {
