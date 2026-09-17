@@ -83,6 +83,7 @@
             display: grid;
             grid-template-columns: 1fr 2fr;
             gap: 30px;
+            overflow: hidden;
         }
 
         .welcome-panel {
@@ -90,6 +91,9 @@
             border: 1px solid var(--glow-color);
             padding: 25px;
             box-shadow: inset 0 0 15px rgba(0,255,102,0.1);
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
         }
 
         .welcome-panel h2 {
@@ -103,7 +107,7 @@
             font-size: 0.9rem;
         }
 
-        /* NEW: Biodata Container styles */
+        /* Biodata Container styles */
         .biodata-toggle-btn {
             background: transparent;
             border: 1px dashed var(--glow-color);
@@ -130,12 +134,12 @@
             padding: 0 10px;
         }
 
-        /* This utility class gets added via JavaScript when opened */
         .biodata-box.open {
-            max-height: 300px; /* Adjust based on how much data you add */
+            max-height: 300px; 
             padding: 15px 10px;
             border: 1px solid var(--glow-color);
             box-shadow: inset 0 0 10px rgba(0, 255, 242, 0.2);
+            margin-bottom: 15px;
         }
 
         .bio-row {
@@ -146,6 +150,7 @@
         .bio-label {
             color: rgba(0, 255, 242, 0.6);
         }
+
         /* Project Grid Buttons */
         .projects-panel {
             display: flex;
@@ -245,12 +250,8 @@
                     <p id="greeting">> INITIALIZING SECURE SESSION...</p>
                     <p>> USER verified: <span style="text-decoration: underline;">0R10N</span></p>
                     <p>> LOG TIME: <span id="timestamp"></span></p>
-                    <br>
-                    <p style="color: var(--alert-color)">WARNING: All activities on this terminal are monitored under federal counter-intelligence protocols. Unauthorized duplication will prompt immediate hardware termination.</p>
-                </div>
-            </div>
- 
-                    <!-- Toggle Button and Collapsible Box -->
+                    
+                    <!-- FIXED: Button and Box are now cleanly nestled inside the panel -->
                     <button class="biodata-toggle-btn" onclick="toggleBiodata()">[+] VIEW OPERATOR BIODATA</button>
                     
                     <div id="biodata-container" class="biodata-box">
@@ -261,7 +262,7 @@
                         <div class="bio-row"><span class="bio-label">MEMO:</span> Do not grant unchecked terminal overrides.</div>
                     </div>
 
-                    <p style="color: var(--alert-color); margin-top: 15px;">WARNING: All activities on this terminal are monitored under federal counter-intelligence protocols. Unauthorized duplication will prompt immediate hardware termination.</p>
+                    <p style="color: var(--alert-color)">WARNING: All activities on this terminal are monitored under federal counter-intelligence protocols. Unauthorized duplication will prompt immediate hardware termination.</p>
                 </div>
             </div>
 
@@ -304,6 +305,7 @@
         // Set dynamic live timestamp
         function updateTime() {
             const now = new Date();
+
             document.getElementById('timestamp').innerText = now.toISOString().replace('T', ' ').substring(0, 19) + ' UTC';
         }
         setInterval(updateTime, 1000);
