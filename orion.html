@@ -617,6 +617,25 @@ function runHiddenCommand(event) {
             outputEl.innerHTML = '';
             inputEl.value = '';
             return;
+        } else if (cmd === 'gay') {
+            reply += `<p <p style="color:#fff;">[EN-SYSTEM]: we get it you love C[REDACTED], Orion."</p>`;
+            reply += `<p <p style="color:#fff;">[EN-SYSTEM]: Let's focus back in your work."</p>`;
+            reply += `<p <p style="color:#fff;">[EN-SYSTEM]: stop yearning."</p>`;
+        } else if (cmd === 'bro' || cmd === 'bless') {
+            reply += `<p style="color:#ffff00;">[CRITICAL CORRUPTION]: INITIALIZING VISUAL FEED...</p>`;
+            reply += `
+                <div style="margin: 15px 0; border: 1px solid #ffff00; padding: 5px; background: #000;">
+                    <iframe 
+                        width="100%" 
+                        height="240" 
+                        src="https://youtube.com" 
+                        title="YouTube video player" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            `;
         } else if (cmd !== '') {
             reply += `<p>ERR: Command '${cmd}' not recognized by node kernel.</p>`;
         }
