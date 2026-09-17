@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AHAI // DECIPHERED DATA FRAME</title>
+    <style>
+        :root {
+            --glow-color: #00fff2;
+            --bg-color: #000000;
+            --panel-bg: rgba(0, 20, 5, 0.6);
+            --text-color: #00fff2;
+            --alert-color: #ff0077;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            cursor: crosshair;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--glow-color);
+            font-family: 'Courier New', Courier, monospace;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* CRT Scanline and Flicker Effects */
+        body::before {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 2;
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none;
+        }
+
+        .screen {
+            padding: 40px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background: radial-gradient(circle, rgba(0,30,10,0.3) 0%, rgba(0,0,0,0.8) 100%);
+        }
+
+        header {
+            border-bottom: 2px solid var(--glow-color);
+            padding-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            text-shadow: 0 0 5px var(--glow-color);
+        }
+
+        .sys-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .back-btn {
+            background: transparent;
+            border: 1px solid var(--glow-color);
+            color: var(--glow-color);
+            font-family: inherit;
+            padding: 5px 15px;
+            text-decoration: none;
+            font-size: 0.8rem;
+            transition: all 0.2s ease;
+        }
+
+        .back-btn:hover {
+            background: var(--glow-color);
+            color: var(--bg-color);
+            box-shadow: 0 0 10px var(--glow-color);
+            font-weight: bold;
+        }
+
+        .document-container {
+            flex-grow: 1;
+            margin: 30px 0;
+            background: var(--panel-bg);
+            border: 1px solid var(--glow-color);
+            padding: 30px;
+            box-shadow: inset 0 0 15px rgba(0,255,102,0.1);
+            overflow-y: auto;
+        }
+
+        .doc-header {
+            color: var(--alert-color);
+            border-bottom: 1px dashed var(--alert-color);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            text-shadow: 0 0 5px var(--alert-color);
+        }
+
+        .doc-body {
+            line-height: 1.8;
+            font-size: 0.95rem;
+            white-space: pre-wrap; /* Keeps line breaks intact */
+        }
+
+        .redacted {
+            background: var(--glow-color);
+            color: var(--bg-color);
+            padding: 0 4px;
+        }
+
+        footer {
+            border-top: 1px solid rgba(0,255,102,0.4);
+            padding-top: 10px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="screen">
+        <header>
+            <div>
+                <div class="sys-title">DEPT OF ARCHIVAL ANOMALIES // DECRYPT INTERFACES</div>
+                <div style="font-size: 0.8rem; opacity: 0.7;">DECRYPT_NODE: OMEGA-01</div>
+            </div>
+            <!-- FIXED: Back button redirects right back to the central orion terminal -->
+            <a href="orion.html" class="back-btn">&lt;&lt; RETURN TO OVERVIEW</a>
+        </header>
+
+        <!-- Main Content Area: Change this text data for different files -->
+        <div class="document-container">
+            <div class="doc-header">CLASSIFIED FILE // RESTRICTED ACCESS CLEARANCE FIVE</div>
+            <div class="doc-body">> FILE REF: PROJ_01 // CHRONOS TIME-WARP
+> DECRYPTION TIMELINE STAMP: SUCCESSFULLY COMPLETED
+
+[LOG REPORT]:
+Field testing initiated at sector <span class="redacted">[REDACTED]</span>. Quantum feedback loops stabilized at 104.2% operational limits. 
+
+Temporal ripples observed in local security monitoring camera streams. Human subjects reported severe disorientation, displacement anomalies, and temporary short-term memory sync errors. 
+
+"The architecture of the loop has shifting parameters. It knows we are watching." - Lead Researcher Vance.
+
+> STATUS: ACTIVE DEPLOYMENT // MONITORING CRITICAL ARTIFACT CONCURRENTLY.</div>
+        </div>
+
+        <footer>
+            <div>DECRYPT ENGINE: SECURE_CORE_v4.1</div>
+            <div>STATUS: DECRYPTION COMPLETED</div>
+        </footer>
+    </div>
+
+</body>
+</html>
