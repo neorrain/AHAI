@@ -230,6 +230,53 @@
             0%, 49% { opacity: 1; }
             50%, 100% { opacity: 0.4; }
         }
+                /* Folder Navigation Layout */
+        .folder-tabs-row {
+            display: flex;
+            gap: 5px;
+            margin-bottom: -1px; /* Glues the tabs directly onto the container border */
+            z-index: 10;
+        }
+        
+        .folder-tab {
+            background: rgba(0, 20, 5, 0.4);
+            border: 1px solid rgba(0, 255, 242, 0.4);
+            border-bottom: none; /* Keeps bottom open so it links to folder card */
+            color: rgba(0, 255, 242, 0.6);
+            font-family: inherit;
+            padding: 10px 20px;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            border-radius: 4px 4px 0 0;
+            transition: all 0.2s ease;
+        }
+        
+        .folder-tab:hover {
+            color: var(--glow-color);
+            background: rgba(0, 255, 242, 0.1);
+            box-shadow: 0 -4px 8px rgba(0, 255, 242, 0.1);
+        }
+        
+        .folder-tab.active {
+            background: var(--panel-bg);
+            color: var(--glow-color);
+            border: 1px solid var(--glow-color);
+            border-bottom: 1px solid transparent; /* Blends seamless into the panel */
+            font-weight: bold;
+            box-shadow: 0 -4px 10px rgba(0, 255, 242, 0.2);
+        }
+        
+        /* Container directly connected beneath the tabs */
+        .folder-content-container {
+            background: var(--panel-bg);
+            border: 1px solid var(--glow-color);
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            box-shadow: inset 0 0 15px rgba(0,255,102,0.1);
+        }
+
     </style>
 </head>
 <body>
@@ -327,6 +374,59 @@ function toggleBiodata() {
     } else {
         button.innerText = '[+] VIEW OPERATOR BIODATA';
     }
+}
+        // Database of items loaded safely without changing pages
+const folderDatabase = {
+    projects: [
+        { code: "PROJ_01 // SECURE", title: "CHRONOS TIME-WARP", action: "Chronos logs open." },
+        { code: "PROJ_04 // CLASSIFIED", title: "D.U.M.B. BLUEPRINTS", action: "Schematics rendered." },
+        { code: "PROJ_09 // RESTRICTED", title: "PROJECT MK-ULTRA II", action: "Neural status: Offline." },
+        { code: "PROJ_12 // TOP SECRET", title: "EBE RETRIEVALS", action: "Autopsy archives loaded." }
+    ],
+    archives: [
+        { code: "ARC_882 // COLD FILE", title: "ROSWELL INCIDENT RAW", action: "1947 manifests open." },
+        { code: "ARC_404 // REDACTED", title: "BERMUDA TRIANGLE LOGS", action: "Telemetry file parsed." },
+        { code: "ARC_109 // ENCRYPTED", title: "VATICAN VAULT LEAKS", action: "Visual core linked." },
+        { code: "ARC_000 // WARNING", title: "SATELLITE ANOMALY #7", action: "Signal map updated." }
+    ],
+    journals: [
+        { code: "LOG_09.12 // VANCE", title: "SYSTEM EXPLOIT DETECTED", action: "'They altered the timestamps...'" },
+        { code: "LOG_10.04 // VANCE", title: "THE BASEMENT LECTURES", action: "'The entity is responding...'" },
+        { code: "LOG_11.23 // ANONYMOUS", title: "RUN BEFORE THEY REBOOT", action: "'Orion is compromised...'" },
+        { code: "LOG_12.01 // OVERSEER", title: "OPERATOR SANITY AUDIT", action: "Surveillance flag up." }
+    ],
+    users: [
+        { code: "UID_01 // ADMIN", title: "SYSTEM OVERSEER", action: "Status: MONITORING USER_0R10N" },
+        { code: "UID_05 // CORE", title: "OPERATOR: ORION VANCE", action: "Status: TERMINAL CONTROL ACTIVE" },
+        { code: "UID_09 // EXTERIOR", title: "ARCHIVIST: VESPER CHEN", action: "Status: ACCESS GRANTED ELSEWHERE" },
+        { code: "UID_XX // UNKNOWN", title: "GUEST SYSTEM SPOOF", action: "Status: BREACH DISCOVERED" }
+    ]
+};
+
+function switchTab(tabKey, tabButton) {
+    // 1. Swap active style classes around the tab links
+    document.querySelectorAll('.folder-tab').forEach(tab => tab.classList.remove('active'));
+    tabButton.classList.add('active');
+
+    // 2. Adjust upper folder contextual text
+    const label = document.getElementById('panel-title-label');
+    label.innerText = `ACTIVE ${tabKey.toUpperCase()} // DECRYPTED VIA TERMINAL`;
+
+    // 3. Clear existing grid contents and rebuild data slots
+    const grid = document.getElementById('dynamic-grid');
+    grid.innerHTML = '';
+
+    folderDatabase[tabKey].forEach(item => {
+        const button = document.createElement('button');
+        button.className = 'project-btn';
+        button.onclick = () => alert(item.action);
+        
+        button.innerHTML = `
+            <span class="code">${item.code}</span>
+            ${item.title}
+        `;
+        grid.appendChild(button);
+    });
 }
         // Personalized alert logic can be hooked into the buttons
     </script>
