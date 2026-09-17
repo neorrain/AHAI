@@ -249,6 +249,21 @@
                     <p style="color: var(--alert-color)">WARNING: All activities on this terminal are monitored under federal counter-intelligence protocols. Unauthorized duplication will prompt immediate hardware termination.</p>
                 </div>
             </div>
+ 
+                    <!-- Toggle Button and Collapsible Box -->
+                    <button class="biodata-toggle-btn" onclick="toggleBiodata()">[+] VIEW OPERATOR BIODATA</button>
+                    
+                    <div id="biodata-container" class="biodata-box">
+                        <div class="bio-row"><span class="bio-label">NAME:</span> Orion Vance</div>
+                        <div class="bio-row"><span class="bio-label">ROLE:</span> Lead Cryptographer</div>
+                        <div class="bio-row"><span class="bio-label">DEPT:</span> Archival Anomalies</div>
+                        <div class="bio-row"><span class="bio-label">STATUS:</span> UNSTABLE // WATCHLIST</div>
+                        <div class="bio-row"><span class="bio-label">MEMO:</span> Do not grant unchecked terminal overrides.</div>
+                    </div>
+
+                    <p style="color: var(--alert-color); margin-top: 15px;">WARNING: All activities on this terminal are monitored under federal counter-intelligence protocols. Unauthorized duplication will prompt immediate hardware termination.</p>
+                </div>
+            </div>
 
             <!-- Right Panel: Project Access Buttons -->
             <div class="projects-panel">
@@ -293,7 +308,21 @@
         }
         setInterval(updateTime, 1000);
         updateTime();
-
+// NEW: Toggle Biodata Open/Close Function
+        function toggleBiodata() {
+            const container = document.getElementById('biodata-container');
+            const button = document.querySelector('.biodata-toggle-btn');
+            
+            // Toggle the 'open' 
+            classcontainer.classList.toggle('open');
+            
+            // Dynamically change button indicator text
+            if (container.classList.contains('open')) {
+                button.innerText = '[-] HIDE OPERATOR BIODATA';
+            } else {
+                button.innerText = '[+] VIEW OPERATOR BIODATA';
+            }
+        }
         // Personalized alert logic can be hooked into the buttons
     </script>
 </body>
