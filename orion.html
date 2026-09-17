@@ -302,29 +302,29 @@
     </div>
 
     <script>
-        // Set dynamic live timestamp
-        function updateTime() {
-            const now = new Date();
+         // 1. Set dynamic live timestamp
+function updateTime() {
+    const now = new Date();
+    document.getElementById('timestamp').innerText = now.toISOString().replace('T', ' ').substring(0, 19) + ' UTC';
+}
 
-            document.getElementById('timestamp').innerText = now.toISOString().replace('T', ' ').substring(0, 19) + ' UTC';
-        }
-        setInterval(updateTime, 1000);
-        updateTime();
-// NEW: Toggle Biodata Open/Close Function
-        function toggleBiodata() {
-            const container = document.getElementById('biodata-container');
-            const button = document.querySelector('.biodata-toggle-btn');
-            
-            // Toggle the 'open' 
-            classcontainer.classList.toggle('open');
-            
-            // Dynamically change button indicator text
-            if (container.classList.contains('open')) {
-                button.innerText = '[-] HIDE OPERATOR BIODATA';
-            } else {
-                button.innerText = '[+] VIEW OPERATOR BIODATA';
-            }
-        }
+// 2. Run the timer every second
+setInterval(updateTime, 1000);
+updateTime();
+
+// 3. Toggle Biodata Container open/close
+function toggleBiodata() {
+    const container = document.getElementById('biodata-container');
+    const button = document.querySelector('.biodata-toggle-btn');
+    
+    container.classList.toggle('open');
+    
+    if (container.classList.contains('open')) {
+        button.innerText = '[-] HIDE OPERATOR BIODATA';
+    } else {
+        button.innerText = '[+] VIEW OPERATOR BIODATA';
+    }
+}
         // Personalized alert logic can be hooked into the buttons
     </script>
 </body>
