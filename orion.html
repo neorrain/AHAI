@@ -610,6 +610,7 @@ function runHiddenCommand(event) {
             reply += `<p>Available strings:<br>- 'read vance'<br>- 'bypass'<br>- 'clear'</p>`;
         } else if (cmd === 'read vance') {
             reply += `<p style="color:#fff;">[RECOVERED LOG]: "They think I'm tracking anomalies. I'm actually hiding them. Vesper knows the master gateway bypass key."</p>`;
+            reply += `<p style="color:#fff;">[RECOVERED LOG]: "I'm not sure how long will they stay oblivious. The world must'nt know."</p>`;
         } else if (cmd === 'bypass') {
             reply += `<p style="color:#00fff2;">ALERT: Proxy loop redirect active. Forwarding security access keys to vesper.html...</p>`;
             setTimeout(() => { window.location.href = "vesper.html"; }, 2000);
@@ -618,9 +619,9 @@ function runHiddenCommand(event) {
             inputEl.value = '';
             return;
         } else if (cmd === 'gay') {
-            reply += `<p <p style="color:#fff;">[EN-SYSTEM]: we get it you love C[REDACTED], Orion."</p>`;
-            reply += `<p <p style="color:#fff;">[EN-SYSTEM]: Let's focus back in your work."</p>`;
-            reply += `<p <p style="color:#fff;">[EN-SYSTEM]: stop yearning."</p>`;
+            reply += `<p <p style="color:#fff;">[EN-SYSTEM]: we get it you love C[REDACTED], Orion.</p>`;
+            reply += `<p <p style="color:#fff;">[EN-SYSTEM]: Let's focus back in your work.</p>`;
+            reply += `<p <p style="color:#fff;">[EN-SYSTEM]: stop yearning.</p>`;
         } else if (cmd === 'bro' || cmd === 'bless') {
             reply += `<p style="color:#ffff00;">[CRITICAL CORRUPTION]: INITIALIZING VISUAL FEED...</p>`;
             reply += `
