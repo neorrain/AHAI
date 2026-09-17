@@ -124,7 +124,6 @@
             background: rgba(0, 255, 242, 0.2);
             box-shadow: 0 0 8px var(--glow-color);
         }
-        /* FIXED: Ensured direct layout variables apply correctly when .open is toggled */
         .biodata-box {
             max-height: 0;
             overflow: hidden;
@@ -135,7 +134,7 @@
         }
 
         .biodata-box.open {
-            max-height: 500px; /* Increased to ensure text fits completely */
+            max-height: 500px; 
             padding: 15px 10px;
             border-color: var(--glow-color);
             box-shadow: inset 0 0 10px rgba(0, 255, 242, 0.2);
@@ -234,14 +233,14 @@
         .folder-tabs-row {
             display: flex;
             gap: 5px;
-            margin-bottom: -1px; /* Glues the tabs directly onto the container border */
+            margin-bottom: -1px;
             z-index: 10;
         }
         
         .folder-tab {
             background: rgba(0, 20, 5, 0.4);
             border: 1px solid rgba(0, 255, 242, 0.4);
-            border-bottom: none; /* Keeps bottom open so it links to folder card */
+            border-bottom: none;
             color: rgba(0, 255, 242, 0.6);
             font-family: inherit;
             padding: 10px 20px;
@@ -261,12 +260,11 @@
             background: var(--panel-bg);
             color: var(--glow-color);
             border: 1px solid var(--glow-color);
-            border-bottom: 1px solid transparent; /* Blends seamless into the panel */
+            border-bottom: 1px solid transparent;
             font-weight: bold;
             box-shadow: 0 -4px 10px rgba(0, 255, 242, 0.2);
         }
         
-        /* Container directly connected beneath the tabs */
         .folder-content-container {
             background: var(--panel-bg);
             border: 1px solid var(--glow-color);
@@ -282,32 +280,26 @@
             display: inline-block;
             color: var(--glow-color);
             font-weight: bold;
-            animation: statusGlitch 7s infinite; /* Cycles the glitch loop every 7 seconds */
+            animation: statusGlitch 7s infinite; 
         }
         
         @keyframes statusGlitch {
-            /* 0% to 92%: Stays completely calm and reads "STABLE" */
             0%, 92%, 94%, 98%, 100% {
                 color: var(--glow-color);
                 text-shadow: none;
             }
-            /* 93% & 95% to 97%: Flips content suddenly to the data-text value and turns red */
             93%, 95%, 96%, 97% {
                 color: var(--alert-color);
                 text-shadow: 0 0 8px var(--alert-color);
             }
-            /* Changes the displayed letters using the CSS content injector */
             93% { content: ""; }
             93%, 95%, 96%, 97% {
-                /* Forces the text to swap out to your custom string layout */
                 font-size: 0.85rem;
             }
-            /* Smoothly handles rendering the hidden alternate text */
             93%::after, 95%::after, 96%::after, 97%::after {
                 content: attr(data-text);
             }
         }
-                /* Screen Shockwave Flash & Shake Engine */
         .screen.glitch-flash {
             animation: screenShock 0.4s ease-in-out;
         }
@@ -324,7 +316,6 @@
             90% { transform: translate(-1px, 1px); }
         }
         
-        /* Updated Status Text Styling */
         .glitch-status {
             color: var(--glow-color);
             font-weight: bold;
@@ -335,7 +326,6 @@
             text-shadow: 0 0 8px var(--alert-color);
         }
         
-        /* Secret Terminal UI Styles */
         .hidden-console {
             display: none;
             position: absolute;
@@ -398,8 +388,8 @@
                     <button class="biodata-toggle-btn" onclick="toggleBiodata()">[+] VIEW OPERATOR BIODATA</button>
                     
                     <div id="biodata-container" class="biodata-box">
-                        <div class="bio-row"><span class="bio-label">NAME:</span> Orion Vance</div>
-                        <div class="bio-row"><span class="bio-label">ROLE:</span> Lead Director</div>
+                        <div class="bio-row"><span class="bio-label">NAME:</span> Orion Vale</div>
+                        <div class="bio-row"><span class="bio-label">ROLE:</span> Director</div>
                         <div class="bio-row"><span class="bio-label">DEPT:</span> Archival Anomalies</div>
                         <div class="bio-row">
                             <span class="bio-label">STATUS:</span>
@@ -441,7 +431,6 @@
                 <div class="folder-content-container">
                     <div class="panel-label" id="panel-title-label">ACTIVE PROJECTS // DECRYPTED VIA TERMINAL</div>
                     <div class="project-grid" id="dynamic-grid">
-                        <!-- Default Content: Projects Grid -->
                         <button class="project-btn" onclick="alert('Accessing Chronos database...')">
                             <span class="code">PROJ_01 // SECURE</span>CHRONOS TIME-WARP
                         </button>
@@ -517,7 +506,7 @@
         users: [
             // FIXED: Changed inner double quotes around HERMES to single quotes to clear parsing string crash
             { code: "UID_05 // MESSENGER", title: "OPERATOR: 'HERMES'", action: "Status: MONITORING USER_R.R.A", url: "user_hermes.html" },
-            { code: "UID_01 // DIRECTOR", title: "OPERATOR: ORION VANCE", action: "Status: TERMINAL CONTROL ACTIVE", url: "user_orion.html" },
+            { code: "UID_01 // DIRECTOR", title: "OPERATOR: ORION VALE", action: "Status: TERMINAL CONTROL ACTIVE", url: "user_orion.html" },
             { code: "UID_09 // CO-DIRECTOR", title: "OPERATOR: CELESTE VESPER", action: "Status: ACCESS GRANTED ELSEWHERE", url: "user_vesper.html" },
             { code: "UID_XX // UNKNOWN", title: "GUEST SYSTEM SPOOF", action: "Status: BREACH DISCOVERED", url: "user_unknown.html" }
         ],
@@ -545,7 +534,6 @@
                 const button = document.createElement('button');
                 button.className = 'project-btn';
                 
-                // FIXED: Changed from alert box popups to dynamic window file path navigations
                 button.onclick = () => {
                     window.location.href = item.url;
                 };
@@ -590,7 +578,6 @@
     }
     queueNextGlitch();
 
-    // 5. Secret Terminal Trigger Logic
     function tryAccessSecretTerminal() {
         if (isUnstable) {
             const term = document.getElementById('hidden-terminal');
@@ -602,7 +589,6 @@
         }
     }
     
-    // Wire click listener safely to status text element if loaded
     window.addEventListener('DOMContentLoaded', () => {
         const statusSpan = document.querySelector('.glitch-status');
         if (statusSpan) statusSpan.onclick = tryAccessSecretTerminal;
@@ -613,7 +599,6 @@
         if (term) term.style.display = 'none';
     }
 
-    // 6. Hidden Reverse-Shell Terminal Command Processor
     function runHiddenCommand(event) {
         if (event.key === 'Enter') {
             const inputEl = document.getElementById('term-input');
@@ -623,8 +608,8 @@
             let reply = `<p style="color:gray;">root# ${inputEl.value}</p>`;
             
             if (cmd === 'help') {
-                reply += `<p>Available strings:<br>- 'read vance'<br>- 'bypass'<br>- 'clear'</p>`;
-            } else if (cmd === 'read vance') {
+                reply += `<p>Available strings:<br>- 'read vale'<br>- 'bypass'<br>- 'clear'</p>`;
+            } else if (cmd === 'read vale') {
                 reply += `<p style="color:#fff;">[RECOVERED LOG]: "They think I'm tracking anomalies. I'm actually hiding them. Vesper knows the master gateway bypass key."</p>`;
                 reply += `<p style="color:#fff;">[RECOVERED LOG]: "I'm not sure how long will they stay oblivious. The world must'nt know."</p>`;
             } else if (cmd === 'bypass') {
@@ -665,7 +650,6 @@
     }
 }
 
-// Keep the old folder switcher working alongside the update
 function switchTab(tabKey, tabButton) {
     document.querySelectorAll('.folder-tab').forEach(tab => tab.classList.remove('active'));
     tabButton.classList.add('active');
@@ -674,7 +658,6 @@ function switchTab(tabKey, tabButton) {
     const grid = document.getElementById('dynamic-grid');
     grid.innerHTML = '';
 
-    // folderDatabase check handles safe legacy fallbacks
     if(typeof folderDatabase !== 'undefined' && folderDatabase[tabKey]) {
         folderDatabase[tabKey].forEach(item => {
             const button = document.createElement('button');
