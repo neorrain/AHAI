@@ -276,6 +276,101 @@
             flex-direction: column;
             box-shadow: inset 0 0 15px rgba(0,255,102,0.1);
         }
+        /* Glitch Status Easter Egg */
+        .glitch-status {
+            position: relative;
+            display: inline-block;
+            color: var(--glow-color);
+            font-weight: bold;
+            animation: statusGlitch 7s infinite; /* Cycles the glitch loop every 7 seconds */
+        }
+        
+        @keyframes statusGlitch {
+            /* 0% to 92%: Stays completely calm and reads "STABLE" */
+            0%, 92%, 94%, 98%, 100% {
+                color: var(--glow-color);
+                text-shadow: none;
+            }
+            /* 93% & 95% to 97%: Flips content suddenly to the data-text value and turns red */
+            93%, 95%, 96%, 97% {
+                color: var(--alert-color);
+                text-shadow: 0 0 8px var(--alert-color);
+            }
+            /* Changes the displayed letters using the CSS content injector */
+            93% { content: ""; }
+            93%, 95%, 96%, 97% {
+                /* Forces the text to swap out to your custom string layout */
+                font-size: 0.85rem;
+            }
+            /* Smoothly handles rendering the hidden alternate text */
+            93%::after, 95%::after, 96%::after, 97%::after {
+                content: attr(data-text);
+            }
+        }
+                /* Screen Shockwave Flash & Shake Engine */
+        .screen.glitch-flash {
+            animation: screenShock 0.4s ease-in-out;
+        }
+        
+        @keyframes screenShock {
+            0%, 100% { 
+                transform: translate(0, 0); 
+                background: radial-gradient(circle, rgba(0,30,10,0.3) 0%, rgba(0,0,0,0.8) 100%);
+            }
+            10% { transform: translate(-4px, 3px); background-color: rgba(255, 0, 119, 0.2); }
+            30% { transform: translate(5px, -2px); background-color: rgba(0, 255, 242, 0.1); }
+            50% { transform: translate(-3px, -3px); background-color: rgba(255, 0, 119, 0.3); }
+            70% { transform: translate(4px, 2px); background-color: rgba(0, 0, 0, 0.8); }
+            90% { transform: translate(-1px, 1px); }
+        }
+        
+        /* Updated Status Text Styling */
+        .glitch-status {
+            color: var(--glow-color);
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .glitch-status.corrupted {
+            color: var(--alert-color) !important;
+            text-shadow: 0 0 8px var(--alert-color);
+        }
+        
+        /* Secret Terminal UI Styles */
+        .hidden-console {
+            display: none;
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 550px; height: 350px;
+            background: rgba(5, 0, 10, 0.95);
+            border: 2px solid var(--alert-color);
+            box-shadow: 0 0 30px rgba(255, 0, 119, 0.4);
+            z-index: 100;
+            flex-direction: column;
+            font-family: inherit;
+        }
+        .hidden-header {
+            background: var(--alert-color);
+            color: black;
+            padding: 5px 10px;
+            font-weight: bold;
+            font-size: 0.8rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .close-term-btn {
+            background: none; border: none; color: black; font-weight: bold; cursor: pointer;
+        }
+        .hidden-output {
+            flex-grow: 1; padding: 15px; font-size: 0.85rem; color: #ff0077; overflow-y: auto; line-height: 1.4;
+        }
+        .hidden-input-line {
+            display: flex; gap: 5px; padding: 10px; border-top: 1px solid rgba(255, 0, 119, 0.3); background: #000;
+        }
+        .hidden-input-line input {
+            background: transparent; border: none; color: #ff0077; outline: none; flex-grow: 1; font-family: inherit; padding: 0; margin: 0;
+        }
 
     </style>
 </head>
@@ -306,7 +401,9 @@
                         <div class="bio-row"><span class="bio-label">NAME:</span> Orion Vance</div>
                         <div class="bio-row"><span class="bio-label">ROLE:</span> Lead Director</div>
                         <div class="bio-row"><span class="bio-label">DEPT:</span> Archival Anomalies</div>
-                        <div class="bio-row"><span class="bio-label">STATUS:</span> UNSTABLE // WATCHLIST</div>
+                        <div class="bio-row">
+                            <span class="bio-label">STATUS:</span>
+                            <span class="glitch-status" data-text="UNSTABLE // WATCHLIST">STABLE</span>
                         <div class="bio-row"><span class="bio-label">MEMO:</span> [REDACTED]</div>
                     </div>
 
@@ -341,6 +438,22 @@
                         <button class="project-btn" onclick="alert('Opening Biologics log...')">
                             <span class="code">PROJ_12 // TOP SECRET</span>EBE RETRIEVALS
                         </button>
+                    </div>
+                                        <!-- Hidden Command Terminal Overlay -->
+                    <div id="hidden-terminal" class="hidden-console">
+                        <div class="hidden-header">
+                            <span>SECURE REVERSE-SHELL ENGINE // ROOT@AHAI_NODE_77</span>
+                            <button onclick="closeHiddenTerminal()" class="close-term-btn">[X]</button>
+                        </div>
+                        <div class="hidden-output" id="term-output">
+                            <p>Establishing shadow handshake...</p>
+                            <p>Exploit successful. System root acquired.</p>
+                            <p>Type 'help' for hidden archives.</p>
+                        </div>
+                        <div class="hidden-input-line">
+                            <span>root#</span>
+                            <input type="text" id="term-input" onkeydown="runHiddenCommand(event)" autocomplete="off">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -428,6 +541,113 @@ function switchTab(tabKey, tabButton) {
         grid.appendChild(button);
     });
 }
+        let isUnstable = false;
+
+// 1. Set dynamic live timestamp
+function updateTime() {
+    const now = new Date();
+    document.getElementById('timestamp').innerText = now.toISOString().replace('T', ' ').substring(0, 19) + ' UTC';
+}
+setInterval(updateTime, 1000);
+updateTime();
+
+// 2. Automated Glitch Loop: Flashes screen and flags tracking variables
+function triggerSystemGlitch() {
+    const statusEl = document.querySelector('.glitch-status');
+    const screenEl = document.querySelector('.screen');
+    
+    // Toggle state to Unstable
+    isUnstable = true;
+    statusEl.innerText = "UNSTABLE // WATCHLIST";
+    statusEl.classList.add('corrupted');
+    screenEl.classList.add('glitch-flash');
+
+    // After 400ms, restore the system back to "STABLE"
+    setTimeout(() => {
+        isUnstable = false;
+        statusEl.innerText = "STABLE";
+        statusEl.classList.remove('corrupted');
+        screenEl.classList.remove('glitch-flash');
+    }, 400);
+}
+
+// Randomly fire the system shake loop every 6 to 9 seconds
+function queueNextGlitch() {
+    const randomDelay = Math.random() * (9000 - 6000) + 6000;
+    setTimeout(() => {
+        triggerSystemGlitch();
+        queueNextGlitch();
+    }, randomDelay);
+}
+queueNextGlitch();
+
+// 3. Status Box Intercept: Opens terminal ONLY if clicked while unstable
+function tryAccessSecretTerminal() {
+    if (isUnstable) {
+        document.getElementById('hidden-terminal').style.display = 'flex';
+        document.getElementById('term-input').focus();
+    } else {
+        alert("Status check: Diagnostics verified normal operation parameters.");
+    }
+}
+// Attach click trigger dynamically to status span line
+document.querySelector('.glitch-status').onclick = tryAccessSecretTerminal;
+
+function closeHiddenTerminal() {
+    document.getElementById('hidden-terminal').style.display = 'none';
+}
+
+// 4. Hidden Terminal Commands Engine
+function runHiddenCommand(event) {
+    if (event.key === 'Enter') {
+        const inputEl = document.getElementById('term-input');
+        const cmd = inputEl.value.trim().toLowerCase();
+        const outputEl = document.getElementById('term-output');
+        
+        let reply = `<p style="color:gray;">root# ${inputEl.value}</p>`;
+        
+        if (cmd === 'help') {
+            reply += `<p>Available strings:<br>- 'read vance'<br>- 'bypass'<br>- 'clear'</p>`;
+        } else if (cmd === 'read vance') {
+            reply += `<p style="color:#fff;">[RECOVERED LOG]: "They think I'm tracking anomalies. I'm actually hiding them. Vesper knows the master gateway bypass key."</p>`;
+        } else if (cmd === 'bypass') {
+            reply += `<p style="color:#00fff2;">ALERT: Proxy loop redirect active. Forwarding security access keys to vesper.html...</p>`;
+            setTimeout(() => { window.location.href = "vesper.html"; }, 2000);
+        } else if (cmd === 'clear') {
+            outputEl.innerHTML = '';
+            inputEl.value = '';
+            return;
+        } else if (cmd !== '') {
+            reply += `<p>ERR: Command '${cmd}' not recognized by node kernel.</p>`;
+        }
+        
+        outputEl.innerHTML += reply;
+        outputEl.scrollTop = outputEl.scrollHeight; // Auto-scrolls downwards
+        inputEl.value = '';
+    }
+}
+
+// Keep the old folder switcher working alongside the update
+function switchTab(tabKey, tabButton) {
+    document.querySelectorAll('.folder-tab').forEach(tab => tab.classList.remove('active'));
+    tabButton.classList.add('active');
+    const label = document.getElementById('panel-title-label');
+    label.innerText = `ACTIVE ${tabKey.toUpperCase()} // DECRYPTED VIA TERMINAL`;
+    const grid = document.getElementById('dynamic-grid');
+    grid.innerHTML = '';
+
+    // folderDatabase check handles safe legacy fallbacks
+    if(typeof folderDatabase !== 'undefined' && folderDatabase[tabKey]) {
+        folderDatabase[tabKey].forEach(item => {
+            const button = document.createElement('button');
+            button.className = 'project-btn';
+            button.onclick = () => alert(item.action);
+            button.innerHTML = `<span class="code">${item.code}</span>${item.title}`;
+            grid.appendChild(button);
+        });
+    }
+}
+
         // Personalized alert logic can be hooked into the buttons
     </script>
 </body>
