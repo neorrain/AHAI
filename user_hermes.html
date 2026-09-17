@@ -3,191 +3,164 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AHAI // PERSONNEL DOSSIER: RAINARD ROZEAL AUDEBERT</title>
+    <title>AHAI // PERSONNEL DOSSIER</title>
     <style>
         :root {
-            --neon-green: #00fff2;
-            --dark-green: #00fff2;
-            --bg-black: #000000;
-            --terminal-gray: #222222;
-            --alert-red: #00ff77;
+            --glow-color: #00fff2;
+            --bg-color: #000000;
+            --panel-bg: rgba(0, 20, 5, 0.6);
+            --text-color: #00fff2;
+            --alert-color: #ff0077;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Courier New', Courier, monospace;
+            cursor: crosshair;
         }
 
         body {
-            background-color: var(--bg-black);
-            color: var(--neon-green);
-            padding: 40px 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-
-        /* Subtle scanline CRT screen overlay */
-        body::before {
-            content: " ";
-            display: block;
-            position: fixed;
-            top: 0; left: 0; bottom: 0; right: 0;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
-            z-index: 9999;
-            background-size: 100% 4px;
-            pointer-events: none;
-        }
-
-        .dossier-card {
-            background-color: var(--terminal-gray);
-            border: 2px solid var(--neon-green);
-            box-shadow: 0 0 15px rgba(57, 255, 20, 0.2);
-            width: 100%;
-            max-width: 650px;
-            padding: 30px;
+            background-color: var(--bg-color);
+            color: var(--glow-color);
+            font-family: 'Courier New', Courier, monospace;
+            height: 100vh;
+            overflow: hidden;
             position: relative;
         }
 
-        /* Classified Watermark/Stamp */
-        .classified-stamp {
+        /* CRT Scanline and Flicker Effects */
+        body::before {
+            content: " ";
+            display: block;
             position: absolute;
-            top: 25px;
-            right: 25px;
-            border: 2px solid var(--alert-red);
-            color: var(--alert-red);
-            padding: 4px 8px;
-            font-weight: bold;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            transform: rotate(8deg);
-            letter-spacing: 1px;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 2;
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none;
         }
 
-        .header-section {
-            border-bottom: 1px solid var(--neon-green);
+        .screen {
+            padding: 40px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background: radial-gradient(circle, rgba(0,30,10,0.3) 0%, rgba(0,0,0,0.8) 100%);
+        }
+
+        header {
+            border-bottom: 2px solid var(--glow-color);
             padding-bottom: 15px;
-            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            text-shadow: 0 0 5px var(--glow-color);
         }
 
-        .system-id {
-            font-size: 0.8rem;
-            color: #00fff2;
-            margin-bottom: 5px;
-        }
-
-        h1 {
-            font-size: 1.6rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .data-group {
-            margin-bottom: 18px;
-            font-size: 1.05rem;
-            line-height: 1.4;
-        }
-
-        .label {
-            color: #00fff2;
-            text-transform: uppercase;
-            font-size: 0.85rem;
-            display: inline-block;
-            width: 120px;
-        }
-
-        .value {
-            color: var(--neon-green);
-        }
-
-        .status-active {
-            color: #00fff2;
+        .sys-title {
+            font-size: 1.3rem;
             font-weight: bold;
-        }
-
-        /* Solid black box over "redacted" data */
-        .redacted {
-            background-color: var(--neon-green);
-            color: var(--neon-green);
-            user-select: none;
-            padding: 0 4px;
-        }
-
-        .terminal-footer {
-            margin-top: 30px;
-            padding-top: 15px;
-            border-top: 1px dashed rgba(57, 255, 20, 0.3);
-            font-size: 0.8rem;
-            color: #00fff2;
+            letter-spacing: 2px;
         }
 
         .back-btn {
-            display: inline-block;
-            margin-top: 20px;
-            color: var(--neon-green);
+            background: transparent;
+            border: 1px solid var(--glow-color);
+            color: var(--glow-color);
+            font-family: inherit;
+            padding: 5px 15px;
             text-decoration: none;
-            border: 1px solid var(--neon-green);
-            padding: 5px 12px;
-            font-size: 0.85rem;
-            transition: background 0.2s;
+            font-size: 0.8rem;
+            transition: all 0.2s ease;
         }
 
         .back-btn:hover {
-            background-color: var(--neon-green);
-            color: var(--bg-black);
+            background: var(--glow-color);
+            color: var(--bg-color);
+            box-shadow: 0 0 10px var(--glow-color);
+            font-weight: bold;
+        }
+
+        .document-container {
+            flex-grow: 1;
+            margin: 30px 0;
+            background: var(--panel-bg);
+            border: 1px solid var(--glow-color);
+            padding: 30px;
+            box-shadow: inset 0 0 15px rgba(0,255,102,0.1);
+            overflow-y: auto;
+        }
+
+        .doc-header {
+            color: var(--alert-color);
+            border-bottom: 1px dashed var(--alert-color);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            text-shadow: 0 0 5px var(--alert-color);
+        }
+
+        .doc-body {
+            line-height: 1.8;
+            font-size: 0.95rem;
+            white-space: pre-wrap; /* Keeps line breaks intact */
+        }
+
+        .redacted {
+            background: var(--glow-color);
+            color: var(--bg-color);
+            padding: 0 4px;
+        }
+
+        footer {
+            border-top: 1px solid rgba(0,255,102,0.4);
+            padding-top: 10px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            opacity: 0.7;
         }
     </style>
 </head>
 <body>
 
-    <div class="dossier-card">
-        <div class="classified-stamp">Clearance Level 5</div>
-        
-        <div class="header-section">
-            <div class="system-id">NODE: 58-OMEGA // PROXY: ACTIVE</div>
-            <h1>Personnel File</h1>
+    <div class="screen">
+        <header>
+            <div>
+                <div class="sys-title">DEPT OF ARCHIVAL ANOMALIES // DECRYPT INTERFACES</div>
+                <div style="font-size: 0.8rem; opacity: 0.7;">DECRYPT_NODE: OMEGA-77</div>
+            </div>
+            <!-- Points back to your main system console index layout -->
+            <a href="index.html" class="back-btn">&lt;&lt; RETURN TO OVERVIEW</a>
+        </header>
+
+        <!-- Main Personnel Profile Area -->
+        <div class="document-container">
+            <div class="doc-header">PERSONNEL DOSSIER // RESTRICTED ACCESS CLEARANCE FIVE</div>
+            <div class="doc-body">> USER ID: 0R10N
+> SYSTEM LINK ACCESS LEVEL: LEVEL 5 (DIRECTOR CRITERIA)
+
+[BIODATA DETAILED]:
+Full Name: Orion Vance
+Assigned Role: Lead Director
+Department: Archival Anomalies
+Current Node Status: STABLE
+
+[SECURITY HANDSHAKE MEMO]:
+Operator active under core mainframe shell root@AHAI_NODE_77. Under counter-intel protocol directives, certain metadata fields have been scrubbed to prevent external exfiltration trace syncs.
+
+Warning: Short-term memory logs linked directly back to quantum telemetry disruptions outlined in <span class="redacted">[PROJ_01 DATA PANELS]</span>. 
+
+> ACCESS STATUS: GRANTED // TARGET VERIFIED.</div>
         </div>
 
-        <div class="data-group">
-            <span class="label">User Login:</span>
-            <span class="value">HERMES</span>
-        </div>
-
-        <div class="data-group">
-            <span class="label">Full Name:</span>
-            <span class="value">Rainard Rozeal Audebert</span>
-        </div>
-
-        <div class="data-group">
-            <span class="label">Assigned Role:</span>
-            <span class="value">Messenger, Subject</span>
-        </div>
-
-        <div class="data-group">
-            <span class="label">Department:</span>
-            <span class="value">Communications</span>
-        </div>
-
-        <div class="data-group">
-            <span class="label">System Status:</span>
-            <span class="value status-active">STABLE</span>
-        </div>
-
-        <div class="data-group">
-            <span class="label">Security Memo:</span>
-            <span class="value">Stable, non-dangerous subject. Rely for communication internally or externally.</span>
-        </div>
-
-        <div class="terminal-footer">
-            <div>SYS_LOC: AHAI HQ // NEXUS POINT</div>
-            <div>WARNING: ALL TERMINAL ACTIVITY MONITORED BY FEDERAL PROTOCOLS.</div>
-        </div>
-
-        <!-- Optional button to close or go back to index.html -->
-        <a href="orion.html" class="back-btn">< Return to Overview</a>
+        <footer>
+            <div>DECRYPT ENGINE: SECURE_CORE_v4.1</div>
+            <div>STATUS: PROFILED AND MONITORING</div>
+        </footer>
     </div>
 
 </body>
