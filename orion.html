@@ -124,23 +124,24 @@
             background: rgba(0, 255, 242, 0.2);
             box-shadow: 0 0 8px var(--glow-color);
         }
-
+        /* FIXED: Ensured direct layout variables apply correctly when .open is toggled */
         .biodata-box {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.4s ease-out, padding 0.4s ease;
             background: rgba(0, 0, 0, 0.6);
-            border: 0px solid var(--glow-color);
+            border: 1px solid transparent;
             padding: 0 10px;
+            transition: max-height 0.4s ease-out, padding 0.4s ease, border-color 0.4s ease;
         }
 
         .biodata-box.open {
-            max-height: 300px; 
+            max-height: 500px; /* Increased to ensure text fits completely */
             padding: 15px 10px;
-            border: 1px solid var(--glow-color);
+            border-color: var(--glow-color);
             box-shadow: inset 0 0 10px rgba(0, 255, 242, 0.2);
             margin-bottom: 15px;
         }
+
 
         .bio-row {
             margin-bottom: 8px;
@@ -256,10 +257,10 @@
                     
                     <div id="biodata-container" class="biodata-box">
                         <div class="bio-row"><span class="bio-label">NAME:</span> Orion Vance</div>
-                        <div class="bio-row"><span class="bio-label">ROLE:</span> Lead Cryptographer</div>
+                        <div class="bio-row"><span class="bio-label">ROLE:</span> Lead Director</div>
                         <div class="bio-row"><span class="bio-label">DEPT:</span> Archival Anomalies</div>
                         <div class="bio-row"><span class="bio-label">STATUS:</span> UNSTABLE // WATCHLIST</div>
-                        <div class="bio-row"><span class="bio-label">MEMO:</span> Do not grant unchecked terminal overrides.</div>
+                        <div class="bio-row"><span class="bio-label">MEMO:</span> [REDACTED]</div>
                     </div>
 
                     <p style="color: var(--alert-color)">WARNING: All activities on this terminal are monitored under federal counter-intelligence protocols. Unauthorized duplication will prompt immediate hardware termination.</p>
