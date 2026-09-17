@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AHAI // PERSONNEL DOSSIER: CELESTE VESPER</title>
+    <style>
+        :root {
+            --glow-color: #00fff2;
+            --bg-color: #000000;
+            --panel-bg: rgba(0, 20, 5, 0.6);
+            --text-color: #00fff2;
+            --alert-color: #ff0077;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            cursor: crosshair;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--glow-color);
+            font-family: 'Courier New', Courier, monospace;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* CRT Scanline and Flicker Effects */
+        body::before {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 2;
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none;
+        }
+
+        .screen {
+            padding: 40px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background: radial-gradient(circle, rgba(0,30,10,0.3) 0%, rgba(0,0,0,0.8) 100%);
+        }
+
+        header {
+            border-bottom: 2px solid var(--glow-color);
+            padding-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            text-shadow: 0 0 5px var(--glow-color);
+        }
+
+        .sys-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .back-btn {
+            background: transparent;
+            border: 1px solid var(--glow-color);
+            color: var(--glow-color);
+            font-family: inherit;
+            padding: 5px 15px;
+            text-decoration: none;
+            font-size: 0.8rem;
+            transition: all 0.2s ease;
+        }
+
+        .back-btn:hover {
+            background: var(--glow-color);
+            color: var(--bg-color);
+            box-shadow: 0 0 10px var(--glow-color);
+            font-weight: bold;
+        }
+
+        .document-container {
+            flex-grow: 1;
+            margin: 30px 0;
+            background: var(--panel-bg);
+            border: 1px solid var(--glow-color);
+            padding: 30px;
+            box-shadow: inset 0 0 15px rgba(0,255,102,0.1);
+            overflow-y: auto;
+        }
+
+        .doc-header {
+            color: var(--alert-color);
+            border-bottom: 1px dashed var(--alert-color);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            text-shadow: 0 0 5px var(--alert-color);
+        }
+
+        .doc-body {
+            line-height: 1.8;
+            font-size: 0.95rem;
+            white-space: pre-wrap;
+        }
+
+        /* Collapsible Section Layouts */
+        details {
+            border: 1px dashed rgba(0, 255, 242, 0.3);
+            margin-bottom: 15px;
+            padding: 5px;
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        details[open] {
+            border: 1px solid var(--glow-color);
+            box-shadow: 0 0 8px rgba(0, 255, 242, 0.2);
+        }
+
+        summary {
+            padding: 10px;
+            font-weight: bold;
+            color: var(--glow-color);
+            cursor: pointer;
+            outline: none;
+            user-select: none;
+            list-style: none; /* Hide default arrow */
+        }
+
+        summary::before {
+            content: "[+] ";
+            color: var(--glow-color);
+        }
+
+        details[open] summary::before {
+            content: "[-] ";
+            color: var(--alert-color);
+        }
+
+        summary:hover {
+            background: rgba(0, 255, 242, 0.1);
+            text-shadow: 0 0 5px var(--glow-color);
+        }
+
+        .details-content {
+            padding: 15px 10px 10px 10px;
+            border-top: 1px dashed rgba(0, 255, 242, 0.2);
+            color: var(--glow-color);
+        }
+
+        .redacted {
+            background: var(--glow-color);
+            color: var(--bg-color);
+            padding: 0 4px;
+        }
+        
+        .redacted-alert {
+            background: var(--alert-color);
+            color: var(--bg-color);
+            padding: 0 4px;
+            font-weight: bold;
+        }
+
+        footer {
+            border-top: 1px solid rgba(0,255,102,0.4);
+            padding-top: 10px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="screen">
+        <header>
+            <div>
+                <div class="sys-title">ASTRAL & HAZARDOUS ANOMALY INSTITUTE // ARCHIVE</div>
+                <div style="font-size: 0.8rem; opacity: 0.7;">DOC_ID: AHAI-HR-000017 // CLASSIFICATION: LEVEL 5</div>
+            </div>
+            <a href="orion.html" class="back-btn">&lt;&lt; RETURN TO OVERVIEW</a>
+        </header>
+
+        <div class="document-container">
+            <div class="doc-header">AHAI PERSONNEL DOSSIER // EXECUTIVE ARCHIVE PROTOCOL</div>
+            
+            <div class="doc-body" style="margin-bottom: 25px;">> TARGET ENTITY: Mx. Celeste Vesper
+> SYSTEM STATUS: ACTIVE PERSONNEL
+> TIMESTAMP STAMP: A284-C6137-Z08-P09</div>
+
+            <!-- Collapsible: Basic Info -->
+            <details open>
+                <summary>BASIC INFORMATION</summary>
+                <div class="details-content">
+Full Name: Mx. Celeste Vesper
+Preferred Name: Celeste
+Personnel ID: AHAI-EX-002
+Position: Assistant Director
+Department: Executive Administration
+Division: Administrative Council
+Clearance Level: Level 5 (Executive)
+Employment Status: Active
+                </div>
+            </details>
+
+            <!-- Collapsible: Personal Info -->
+            <details>
+                <summary>PERSONAL INFORMATION</summary>
+                <div class="details-content">
+Pronouns: Any Pronouns
+Species: <span class="redacted-alert">[Ω CLEARANCE REQUIRED]</span>
+Origin: Prime Nexus
+Date of Birth (NSC): A283-C9418-Z12-P23
+Age: <span class="redacted">CLASSIFIED</span>
+
+Languages:
+- Nexus Common
+- Standard Galactic
+- English Institute
+- Sign
+- Various documented extinct dialects
+                </div>
+            </details>
+
+            <!-- Collapsible: Professional Profile -->
+            <details>
+                <summary>PROFESSIONAL PROFILE</summary>
+                <div class="details-content">
+Primary Specialization:
+- Astronomical Anomalies
+- Archival Preservation
+- Containment Ethics
+
+Primary Duties:
+- Oversees Institute administration.
+- Reviews ethical compliance for containment operations.
+- Supervises preservation of historical anomaly records.
+- Acts on behalf of the Director when delegated.
+
+Secondary Duties:
+- Public communications
+- Archive restoration
+- Executive mediation
+- Staff orientation
+
+Current Assignment: Executive Administration & Central Archive Oversight
+                </div>
+            </details>
+
+            <!-- Collapsible: Qualifications -->
+            <details>
+                <summary>QUALIFICATIONS & TRAITS</summary>
+                <div class="details-content">
+Education:
+- Doctorate-equivalent in Astronomical Phenomena
+- Advanced Certification in Interversal Ethics
+- Master Archivist Accreditation
+
+Certifications:
+- Executive Leadership License
+- Omega Archive Authorization
+- Hazard Response Qualification IV
+
+Notable Skills:
+- Exceptional memory retention
+- Ancient language translation
+- High-pressure diplomacy
+- Crisis de-escalation
+- Public speaking
+
+Known Weaknesses:
+- Frequently accepts excessive workloads.
+- Displays emotional investment in preservation cases.
+- Known to ignore scheduled breaks.
+                </div>
+            </details>
+
+            <!-- Collapsible: Psychological Evaluation -->
+            <details>
+                <summary>PSYCHOLOGICAL EVALUATION</summary>
+                <div class="details-content">
+Temperament: Professional, articulate, composed.
+Stress Tolerance: Exceptional.
+Leadership Assessment: Highly trusted among Institute personnel. Frequently resolves conflicts between departments before escalation.
+Interpersonal Notes: Approachable despite executive position. Maintains positive relationships with staff across all clearance levels.
+
+Psychological Remarks: Subject demonstrates profound empathy without compromising operational judgment. Continued wellness evaluations recommended due to chronic overwork tendencies.
+                </div>
+            </details>
+
+            <!-- Collapsible: Medical Record -->
+            <details>
+                <summary>MEDICAL RECORD</summary>
+                <div class="details-content">
+Medical Status: Excellent
+Known Allergies: None documented.
+Medical Restrictions: Mandatory recovery leave after prolonged expedition assignments.
+                </div>
+            </details>
+
+            <!-- Collapsible: Anomalous Info -->
+            <details>
+                <summary>ANOMALOUS INFORMATION</summary>
+                <div class="details-content">
+Classification: <span class="redacted-alert">[Ω CLEARANCE REQUIRED]</span>
+Designation: <span class="redacted">REDACTED</span>
+Observed Abilities: <span class="redacted">REDACTED</span>
+Containment Status: Not Applicable.
+                </div>
+            </details>
+
+            <!-- Collapsible: Equipment -->
+            <details>
+                <summary>EQUIPMENT LOG</summary>
+                <div class="details-content">
+Issued Equipment:
+- Executive Identification Badge
+- Quantum Archive Access Key
+- Secure Communications Device Level 5
+- Data Tablet
+
+Personal Research Tools:
+- Portable Stellar Scanner
+- Archive Restoration Kit
+- Personal Observation Journal
+                </div>
+            </details>
+
+            <!-- Collapsible: Performance Record -->
+            <details>
+                <summary>PERFORMANCE RECORD</summary>
+                <div class="details-content">
+Awards:
+- Founder Medal
+- Archive Cross
+- Distinguished Service Citation
+- Ethics Council Recognition
+
+Disciplinary Actions: None.
+
+Major Contributions:
+- Modernization of Executive Archive Systems
+- Revision of Institute Containment Ethics Guidelines
+- Preservation of over 1.8 million historical anomaly records
+- Development of the Public Information Initiative
+
+Years of Service: <span class="redacted">CLASSIFIED</span>
+                </div>
+            </details>
+
+            <!-- Collapsible: Administrative Notes -->
+            <details>
+                <summary>ADMINISTRATIVE NOTES</summary>
+                <div class="details-content">
+Supervisor: Director Orion Vale
+
+Subordinates:
+- Executive Secretariat
+- Archive Administration
+- Public Affairs Office
+
+Office Location: Executive Wing - Central Headquarters
+
+Security Permissions:
+- Executive Administrative Authority
+- Archive Master Access
+- Emergency Command Authorization
+                </div>
+            </details>
+
+            <!-- Collapsible: Final Remarks & Director's Notes -->
+            <details open>
+                <summary>FINAL REMARKS & DIRECTIVES</summary>
+                <div class="details-content">
+Mx. Celeste Vesper continues to exemplify the Institute's foundational principle that understanding must precede action. Their commitment to ethical oversight and historical preservation has significantly influenced modern AHAI policy. Personnel consistently describe the Assistant Director as approachable, compassionate, and unwaveringly dedicated to both the Institute and its people.
+
+[DIRECTOR'S OBSERVATION]
+Author: Dr. Orion Vale
+
+"Assistant Director Vesper possesses an exceptional ability to recognize the historical significance of even the most routine observations. While their dedication to the Institute is beyond question, they continue to require periodic reminders that the preservation of personnel is no less important than the preservation of knowledge. I recommend compulsory leave be enforced when necessary."
+                </div>
+            </details>
+        </div>
+
+        <footer>
+            <div>DECRYPT ENGINE: SECURE_CORE_v4.1</div>
+            <div>LAST REVIEWED: A284-C6136-Z12-P30</div>
+        </footer>
+    </div>
+
+</body>
+</html>
