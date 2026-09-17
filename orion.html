@@ -467,184 +467,198 @@
         </footer>
     </div>
 
-    <script>
-         // 1. Set dynamic live timestamp
-function updateTime() {
-    const now = new Date();
-    document.getElementById('timestamp').innerText = now.toISOString().replace('T', ' ').substring(0, 19) + ' UTC';
-}
+<script>
+    let isUnstable = false;
 
-// 2. Run the timer every second
-setInterval(updateTime, 1000);
-updateTime();
-
-// 3. Toggle Biodata Container open/close
-function toggleBiodata() {
-    const container = document.getElementById('biodata-container');
-    const button = document.querySelector('.biodata-toggle-btn');
-    
-    container.classList.toggle('open');
-    
-    if (container.classList.contains('open')) {
-        button.innerText = '[-] HIDE OPERATOR BIODATA';
-    } else {
-        button.innerText = '[+] VIEW OPERATOR BIODATA';
+    // 1. Set dynamic live timestamp
+    function updateTime() {
+        const now = new Date();
+        document.getElementById('timestamp').innerText = now.toISOString().replace('T', ' ').substring(0, 19) + ' UTC';
     }
-}
-        // Database of items loaded safely without changing pages
-const folderDatabase = {
-    projects: [
-        { code: "PROJ_01 // SECURE", title: "CHRONOS TIME-WARP", action: "Chronos logs open." },
-        { code: "PROJ_04 // CLASSIFIED", title: "D.U.M.B. BLUEPRINTS", action: "Schematics rendered." },
-        { code: "PROJ_09 // RESTRICTED", title: "PROJECT MK-ULTRA II", action: "Neural status: Offline." },
-        { code: "PROJ_12 // TOP SECRET", title: "EBE RETRIEVALS", action: "Autopsy archives loaded." }
-        { code: "PROJ_23 // SECURE", title: "MESSENGER REPORTS", url: "ahaiterminal.atabook.org" }
-    ],
-    archives: [
-        { code: "ARC_882 // COLD FILE", title: "ROSWELL INCIDENT RAW", action: "1947 manifests open." },
-        { code: "ARC_404 // REDACTED", title: "BERMUDA TRIANGLE LOGS", action: "Telemetry file parsed." },
-        { code: "ARC_109 // ENCRYPTED", title: "VATICAN VAULT LEAKS", action: "Visual core linked." },
-        { code: "ARC_000 // WARNING", title: "SATELLITE ANOMALY #7", action: "Signal map updated." }
-    ],
-    journals: [
-        { code: "LOG_09.12 // VANCE", title: "SYSTEM EXPLOIT DETECTED", action: "'They altered the timestamps...'" },
-        { code: "LOG_10.04 // VANCE", title: "THE BASEMENT LECTURES", action: "'The entity is responding...'" },
-        { code: "LOG_11.23 // ANONYMOUS", title: "RUN BEFORE THEY REBOOT", action: "'Orion is compromised...'" },
-        { code: "LOG_12.01 // OVERSEER", title: "OPERATOR SANITY AUDIT", action: "Surveillance flag up." }
-    ],
-    users: [
-        { code: "UID_05 // MESSENGER", title: "OPERATOR: "HERMES"", action: "Status: MONITORING USER_R.R.A" },
-        { code: "UID_01 // DIRECTOR", title: "OPERATOR: ORION VANCE", action: "Status: TERMINAL CONTROL ACTIVE" },
-        { code: "UID_09 // CO-DIRECTOR", title: "OPERATOR: CELESTE VESPER", action: "Status: ACCESS GRANTED ELSEWHERE" },
-        { code: "UID_XX // UNKNOWN", title: "GUEST SYSTEM SPOOF", action: "Status: BREACH DISCOVERED" }
-    ]
-};
+    setInterval(updateTime, 1000);
+    updateTime();
 
-function switchTab(tabKey, tabButton) {
-    // 1. Swap active style classes around the tab links
-    document.querySelectorAll('.folder-tab').forEach(tab => tab.classList.remove('active'));
-    tabButton.classList.add('active');
-
-    // 2. Adjust upper folder contextual text
-    const label = document.getElementById('panel-title-label');
-    label.innerText = `ACTIVE ${tabKey.toUpperCase()} // DECRYPTED VIA TERMINAL`;
-
-    // 3. Clear existing grid contents and rebuild data slots
-    const grid = document.getElementById('dynamic-grid');
-    grid.innerHTML = '';
-
-    folderDatabase[tabKey].forEach(item => {
-        const button = document.createElement('button');
-        button.className = 'project-btn';
-        button.onclick = () => alert(item.action);
+    // 2. Toggle Biodata Container open/close
+    function toggleBiodata() {
+        const container = document.getElementById('biodata-container');
+        const button = document.querySelector('.biodata-toggle-btn');
         
-        button.innerHTML = `
-            <span class="code">${item.code}</span>
-            ${item.title}
-        `;
-        grid.appendChild(button);
-    });
-}
-        let isUnstable = false;
-
-// 1. Set dynamic live timestamp
-function updateTime() {
-    const now = new Date();
-    document.getElementById('timestamp').innerText = now.toISOString().replace('T', ' ').substring(0, 19) + ' UTC';
-}
-setInterval(updateTime, 1000);
-updateTime();
-
-// 2. Automated Glitch Loop: Flashes screen and flags tracking variables
-function triggerSystemGlitch() {
-    const statusEl = document.querySelector('.glitch-status');
-    const screenEl = document.querySelector('.screen');
-    
-    // Toggle state to Unstable
-    isUnstable = true;
-    statusEl.innerText = "UNSTABLE // WATCHLIST";
-    statusEl.classList.add('corrupted');
-    screenEl.classList.add('glitch-flash');
-
-    // After 400ms, restore the system back to "STABLE"
-    setTimeout(() => {
-        isUnstable = false;
-        statusEl.innerText = "STABLE";
-        statusEl.classList.remove('corrupted');
-        screenEl.classList.remove('glitch-flash');
-    }, 400);
-}
-
-// Randomly fire the system shake loop every 6 to 9 seconds
-function queueNextGlitch() {
-    const randomDelay = Math.random() * (9000 - 6000) + 6000;
-    setTimeout(() => {
-        triggerSystemGlitch();
-        queueNextGlitch();
-    }, randomDelay);
-}
-queueNextGlitch();
-
-// 3. Status Box Intercept: Opens terminal ONLY if clicked while unstable
-function tryAccessSecretTerminal() {
-    if (isUnstable) {
-        document.getElementById('hidden-terminal').style.display = 'flex';
-        document.getElementById('term-input').focus();
-    } else {
-        alert("Status check: Diagnostics verified normal operation parameters.");
-    }
-}
-// Attach click trigger dynamically to status span line
-document.querySelector('.glitch-status').onclick = tryAccessSecretTerminal;
-
-function closeHiddenTerminal() {
-    document.getElementById('hidden-terminal').style.display = 'none';
-}
-
-// 4. Hidden Terminal Commands Engine
-function runHiddenCommand(event) {
-    if (event.key === 'Enter') {
-        const inputEl = document.getElementById('term-input');
-        const cmd = inputEl.value.trim().toLowerCase();
-        const outputEl = document.getElementById('term-output');
+        container.classList.toggle('open');
         
-        let reply = `<p style="color:gray;">root# ${inputEl.value}</p>`;
-        
-        if (cmd === 'help') {
-            reply += `<p>Available strings:<br>- 'read vance'<br>- 'bypass'<br>- 'clear'</p>`;
-        } else if (cmd === 'read vance') {
-            reply += `<p style="color:#fff;">[RECOVERED LOG]: "They think I'm tracking anomalies. I'm actually hiding them. Vesper knows the master gateway bypass key."</p>`;
-            reply += `<p style="color:#fff;">[RECOVERED LOG]: "I'm not sure how long will they stay oblivious. The world must'nt know."</p>`;
-        } else if (cmd === 'bypass') {
-            reply += `<p style="color:#00fff2;">ALERT: Proxy loop redirect active. Forwarding security access keys to vesper.html...</p>`;
-            setTimeout(() => { window.location.href = "vesper.html"; }, 2000);
-        } else if (cmd === 'clear') {
-            outputEl.innerHTML = '';
-            inputEl.value = '';
-            return;
-        } else if (cmd === 'gay') {
-            reply += `<p <p style="color:#fff;">[EN-SYSTEM]: we get it you love C[REDACTED], Orion.</p>`;
-            reply += `<p <p style="color:#fff;">[EN-SYSTEM]: Let's focus back in your work.</p>`;
-            reply += `<p <p style="color:#fff;">[EN-SYSTEM]: stop yearning.</p>`;
-        } else if (cmd === 'bro' || cmd === 'bless') {
-            reply += `<p style="color:#ffff00;">[CRITICAL CORRUPTION]: INITIALIZING VISUAL FEED...</p>`;
-            reply += `
-                <div style="margin: 15px 0; border: 1px solid #ffff00; padding: 5px; background: #000;">
-                    <iframe 
-                        width="100%" 
-                        height="225" 
-                        src="https://youtu.be/dQw4w9WgXcQ?si=6gTeLrgViFJ3Z3O4" 
-                        title="sorry bro" 
-                        frameborder="0" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                        allowfullscreen>
-                    </iframe>
-                </div>
-            `;
-        } else if (cmd !== '') {
-            reply += `<p>ERR: Command '${cmd}' not recognized by node kernel.</p>`;
+        if (container.classList.contains('open')) {
+            button.innerText = '[-] HIDE OPERATOR BIODATA';
+        } else {
+            button.innerText = '[+] VIEW OPERATOR BIODATA';
         }
+    }
+
+    // Database of items loaded safely without changing pages
+    const folderDatabase = {
+        projects: [
+            { code: "PROJ_01 // SECURE", title: "CHRONOS TIME-WARP", action: "Chronos logs open.", url: "chronos.html" },
+            { code: "PROJ_04 // CLASSIFIED", title: "D.U.M.B. BLUEPRINTS", action: "Schematics rendered.", url: "blueprints.html" },
+            { code: "PROJ_09 // RESTRICTED", title: "PROJECT MK-ULTRA II", action: "Neural status: Offline.", url: "mkultra.html" },
+            { code: "PROJ_12 // TOP SECRET", title: "EBE RETRIEVALS", action: "Autopsy archives loaded.", url: "ebe.html" },
+            // FIXED: Added missing comma above and configured local/external url path routing rules
+            { code: "PROJ_23 // SECURE", title: "MESSENGER REPORTS", action: "Opening encrypted messenger logs...", url: "https://atabook.org" }
+        ],
+        archives: [
+            { code: "ARC_882 // COLD FILE", title: "ROSWELL INCIDENT RAW", action: "1947 manifests open.", url: "roswell.html" },
+            { code: "ARC_404 // REDACTED", title: "BERMUDA TRIANGLE LOGS", action: "Telemetry file parsed.", url: "bermuda.html" },
+            { code: "ARC_109 // ENCRYPTED", title: "VATICAN VAULT LEAKS", action: "Visual core linked.", url: "vatican.html" },
+            { code: "ARC_000 // WARNING", title: "SATELLITE ANOMALY #7", action: "Signal map updated.", url: "satellite.html" }
+        ],
+        journals: [
+            { code: "LOG_09.12 // VANCE", title: "SYSTEM EXPLOIT DETECTED", action: "'They altered the timestamps...'", url: "journal_sept.html" },
+            { code: "LOG_10.04 // VANCE", title: "THE BASEMENT LECTURES", action: "'The entity is responding...'", url: "journal_oct.html" },
+            { code: "LOG_11.23 // ANONYMOUS", title: "RUN BEFORE THEY REBOOT", action: "'Orion is compromised...'", url: "journal_warning.html" },
+            { code: "LOG_12.01 // OVERSEER", title: "OPERATOR SANITY AUDIT", action: "Surveillance flag up.", url: "journal_audit.html" }
+        ],
+        users: [
+            // FIXED: Changed inner double quotes around HERMES to single quotes to clear parsing string crash
+            { code: "UID_05 // MESSENGER", title: "OPERATOR: 'HERMES'", action: "Status: MONITORING USER_R.R.A", url: "user_hermes.html" },
+            { code: "UID_01 // DIRECTOR", title: "OPERATOR: ORION VANCE", action: "Status: TERMINAL CONTROL ACTIVE", url: "user_orion.html" },
+            { code: "UID_09 // CO-DIRECTOR", title: "OPERATOR: CELESTE VESPER", action: "Status: ACCESS GRANTED ELSEWHERE", url: "user_vesper.html" },
+            { code: "UID_XX // UNKNOWN", title: "GUEST SYSTEM SPOOF", action: "Status: BREACH DISCOVERED", url: "user_unknown.html" }
+        ],
+        messenger: [
+            { code: "MSG_INTERCEPT_01", title: "INTERCEPTED BACKCHANNEL LOGS", url: "intercept_logs.html" },
+            { code: "MSG_FLAG_99", title: "ENCRYPTED SIGNAL CHAT", url: "encrypted_chat.html" },
+            { code: "MSG_INTEL_03", title: "BLACK-OPS COURIER DISPATCH", url: "courier_dispatch.html" },
+            { code: "MSG_LEAK_04", title: "INTERNAL WHISTLEBLOWER TRANSMISSION", url: "whistleblower.html" }
+        ]
+    };
+
+    // 3. Tab Navigation Engine 
+    function switchTab(tabKey, tabButton) {
+        document.querySelectorAll('.folder-tab').forEach(tab => tab.classList.remove('active'));
+        tabButton.classList.add('active');
+
+        const label = document.getElementById('panel-title-label');
+        label.innerText = `ACTIVE ${tabKey.toUpperCase()} // DECRYPTED VIA TERMINAL`;
+
+        const grid = document.getElementById('dynamic-grid');
+        grid.innerHTML = '';
+
+        if (folderDatabase[tabKey]) {
+            folderDatabase[tabKey].forEach(item => {
+                const button = document.createElement('button');
+                button.className = 'project-btn';
+                
+                // FIXED: Changed from alert box popups to dynamic window file path navigations
+                button.onclick = () => {
+                    window.location.href = item.url;
+                };
+                
+                button.innerHTML = `
+                    <span class="code">${item.code}</span>
+                    ${item.title}
+                `;
+                grid.appendChild(button);
+            });
+        }
+    }
+
+    // 4. Automated Glitch Loop
+    function triggerSystemGlitch() {
+        const statusEl = document.querySelector('.glitch-status');
+        const screenEl = document.querySelector('.screen');
         
+        isUnstable = true;
+        if (statusEl) {
+            statusEl.innerText = "UNSTABLE // WATCHLIST";
+            statusEl.classList.add('corrupted');
+        }
+        if (screenEl) screenEl.classList.add('glitch-flash');
+
+        setTimeout(() => {
+            isUnstable = false;
+            if (statusEl) {
+                statusEl.innerText = "STABLE";
+                statusEl.classList.remove('corrupted');
+            }
+            if (screenEl) screenEl.classList.remove('glitch-flash');
+        }, 400);
+    }
+
+    function queueNextGlitch() {
+        const randomDelay = Math.random() * (9000 - 6000) + 6000;
+        setTimeout(() => {
+            triggerSystemGlitch();
+            queueNextGlitch();
+        }, randomDelay);
+    }
+    queueNextGlitch();
+
+    // 5. Secret Terminal Trigger Logic
+    function tryAccessSecretTerminal() {
+        if (isUnstable) {
+            const term = document.getElementById('hidden-terminal');
+            if (term) term.style.display = 'flex';
+            const input = document.getElementById('term-input');
+            if (input) input.focus();
+        } else {
+            alert("Status check: Diagnostics verified normal operation parameters.");
+        }
+    }
+    
+    // Wire click listener safely to status text element if loaded
+    window.addEventListener('DOMContentLoaded', () => {
+        const statusSpan = document.querySelector('.glitch-status');
+        if (statusSpan) statusSpan.onclick = tryAccessSecretTerminal;
+    });
+
+    function closeHiddenTerminal() {
+        const term = document.getElementById('hidden-terminal');
+        if (term) term.style.display = 'none';
+    }
+
+    // 6. Hidden Reverse-Shell Terminal Command Processor
+    function runHiddenCommand(event) {
+        if (event.key === 'Enter') {
+            const inputEl = document.getElementById('term-input');
+            const cmd = inputEl.value.trim().toLowerCase();
+            const outputEl = document.getElementById('term-output');
+            
+            let reply = `<p style="color:gray;">root# ${inputEl.value}</p>`;
+            
+            if (cmd === 'help') {
+                reply += `<p>Available strings:<br>- 'read vance'<br>- 'bypass'<br>- 'gay'<br>- 'bro'<br>- 'clear'</p>`;
+            } else if (cmd === 'read vance') {
+                reply += `<p style="color:#fff;">[RECOVERED LOG]: "They think I'm tracking anomalies. I'm actually hiding them. Vesper knows the master gateway bypass key."</p>`;
+                reply += `<p style="color:#fff;">[RECOVERED LOG]: "I'm not sure how long will they stay oblivious. The world must'nt know."</p>`;
+            } else if (cmd === 'bypass') {
+                reply += `<p style="color:#00fff2;">ALERT: Proxy loop redirect active. Forwarding security access keys to vesper.html...</p>`;
+                setTimeout(() => { window.location.href = "vesper.html"; }, 2000);
+            } else if (cmd === 'clear') {
+                outputEl.innerHTML = '';
+                inputEl.value = '';
+                return;
+            } else if (cmd === 'gay') {
+                // FIXED: Repaired malformed markup tags inside response blocks
+                reply += `<p style="color:#fff;">[EN-SYSTEM]: we get it you love C[REDACTED], Orion.</p>`;
+                reply += `<p style="color:#fff;">[EN-SYSTEM]: Let's focus back in your work.</p>`;
+                reply += `<p style="color:#fff;">[EN-SYSTEM]: stop yearning.</p>`;
+            } else if (cmd === 'bro' || cmd === 'bless' || cmd === 'rickroll') {
+                reply += `<p style="color:#ffff00;">[CRITICAL CORRUPTION]: INITIALIZING VISUAL FEED...</p>`;
+                // Embedded YouTube Rickroll feed integration parameters
+                reply += `
+                    <div style="margin: 15px 0; border: 1px solid #ffff00; padding: 5px; background: #000;">
+                        <iframe 
+                            width="100%" 
+                            height="225" 
+                            src="https://youtube.com" 
+                            title="sorry bro" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                `;
+            } else if (cmd !== '') {
+                reply += `<p>ERR: Command '${cmd}' not recognized by node kernel.</p>`;
+            }
+            
         outputEl.innerHTML += reply;
         outputEl.scrollTop = outputEl.scrollHeight; // Auto-scrolls downwards
         inputEl.value = '';
