@@ -448,11 +448,14 @@
                         <button class="project-btn" onclick="alert('Accessing Hive Schematics...')">
                             <span class="code">PROJ_04 // CLASSIFIED</span>D.U.M.B. BLUEPRINTS
                         </button>
-                        <button class="project-btn" onclick="alert('Neural uplink failed.')">
+                        <button class="project-btn" onclick="alert('Neural uplink failed with subject.')">
                             <span class="code">PROJ_09 // RESTRICTED</span>PROJECT MK-ULTRA II
                         </button>
                         <button class="project-btn" onclick="alert('Opening Biologics log...')">
                             <span class="code">PROJ_12 // TOP SECRET</span>EBE RETRIEVALS
+                        </button>
+                        <button class="project-btn" onclick="alert('Collecting Reports from the Messenger...')">
+                            <span class="code">PROJ_23 // SECURE</span>MESSENGER REPORTS
                         </button>
                     </div>
                 </div>
@@ -495,6 +498,7 @@ const folderDatabase = {
         { code: "PROJ_04 // CLASSIFIED", title: "D.U.M.B. BLUEPRINTS", action: "Schematics rendered." },
         { code: "PROJ_09 // RESTRICTED", title: "PROJECT MK-ULTRA II", action: "Neural status: Offline." },
         { code: "PROJ_12 // TOP SECRET", title: "EBE RETRIEVALS", action: "Autopsy archives loaded." }
+        { code: "PROJ_23 // SECURE", title: "MESSENGER REPORTS", url: "ahaiterminal.atabook.org" }
     ],
     archives: [
         { code: "ARC_882 // COLD FILE", title: "ROSWELL INCIDENT RAW", action: "1947 manifests open." },
@@ -509,9 +513,9 @@ const folderDatabase = {
         { code: "LOG_12.01 // OVERSEER", title: "OPERATOR SANITY AUDIT", action: "Surveillance flag up." }
     ],
     users: [
-        { code: "UID_01 // ADMIN", title: "SYSTEM OVERSEER", action: "Status: MONITORING USER_0R10N" },
-        { code: "UID_05 // CORE", title: "OPERATOR: ORION VANCE", action: "Status: TERMINAL CONTROL ACTIVE" },
-        { code: "UID_09 // EXTERIOR", title: "ARCHIVIST: VESPER CHEN", action: "Status: ACCESS GRANTED ELSEWHERE" },
+        { code: "UID_05 // MESSENGER", title: "OPERATOR: "HERMES"", action: "Status: MONITORING USER_R.R.A" },
+        { code: "UID_01 // DIRECTOR", title: "OPERATOR: ORION VANCE", action: "Status: TERMINAL CONTROL ACTIVE" },
+        { code: "UID_09 // CO-DIRECTOR", title: "OPERATOR: CELESTE VESPER", action: "Status: ACCESS GRANTED ELSEWHERE" },
         { code: "UID_XX // UNKNOWN", title: "GUEST SYSTEM SPOOF", action: "Status: BREACH DISCOVERED" }
     ]
 };
@@ -661,8 +665,13 @@ function switchTab(tabKey, tabButton) {
         folderDatabase[tabKey].forEach(item => {
             const button = document.createElement('button');
             button.className = 'project-btn';
-            button.onclick = () => alert(item.action);
-            button.innerHTML = `<span class="code">${item.code}</span>${item.title}`;
+            button.onclick = () => {
+                window.location.href = item.url;
+            };
+            button.innerHTML = `
+                <span class="code">${item.code}</span>
+                ${item.title}
+            `;
             grid.appendChild(button);
         });
     }
