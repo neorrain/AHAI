@@ -103,6 +103,49 @@
             font-size: 0.9rem;
         }
 
+        /* NEW: Biodata Container styles */
+        .biodata-toggle-btn {
+            background: transparent;
+            border: 1px dashed var(--glow-color);
+            color: var(--glow-color);
+            font-family: inherit;
+            padding: 8px;
+            margin: 15px 0;
+            text-align: center;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .biodata-toggle-btn:hover {
+            background: rgba(0, 255, 242, 0.2);
+            box-shadow: 0 0 8px var(--glow-color);
+        }
+
+        .biodata-box {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out, padding 0.4s ease;
+            background: rgba(0, 0, 0, 0.6);
+            border: 0px solid var(--glow-color);
+            padding: 0 10px;
+        }
+
+        /* This utility class gets added via JavaScript when opened */
+        .biodata-box.open {
+            max-height: 300px; /* Adjust based on how much data you add */
+            padding: 15px 10px;
+            border: 1px solid var(--glow-color);
+            box-shadow: inset 0 0 10px rgba(0, 255, 242, 0.2);
+        }
+
+        .bio-row {
+            margin-bottom: 8px;
+            font-size: 0.85rem;
+        }
+
+        .bio-label {
+            color: rgba(0, 255, 242, 0.6);
+        }
         /* Project Grid Buttons */
         .projects-panel {
             display: flex;
